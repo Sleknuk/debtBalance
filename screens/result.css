@@ -1,0 +1,90 @@
+.screen, 
+#root, 
+html, 
+body {
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+
+*, div {
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%
+}
+
+.header,
+.footer {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 40px;
+  /* ook wel, flex: 0 0 64px; */
+}
+
+.content {
+  flex-grow: 1;
+  flex-shrink: 1;
+  /* ook wel, flex: 1; */
+  overflow-y: auto;
+}
+
+/* styling */
+
+.screen {
+  border: none;
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.842);
+}
+
+.content {
+  background-color: rgba(0, 0, 0, 0.719);
+}
+
+.footer {
+  background-color: rgba(0, 0, 0, 0.842);
+}
+
+.Try-Button {
+  height: 100%;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.705);
+  background-color: rgba(0, 0, 0, 0.842);
+  border: none;
+  border-top: 3px solid rgb(14, 190, 202);
+}
+
+.Try-Button:hover{
+  background: rgba(0, 0, 0, 0.719);
+  color: rgb(14, 190, 202);
+}
+
+.Result-Table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.705);
+}
+
+h4{
+	display: flex;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.61);
+}
+
+p{
+  color: rgba(255, 255, 255, 0.705);
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.data-content{
+  display: flex;
+  justify-content: center;
+}
