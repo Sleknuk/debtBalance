@@ -10,7 +10,6 @@ import {
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
     title: 'Links',
-    footerStyle: { backgroundColor: 'red' },
   };
   constructor(props) {
     super(props);

@@ -14,12 +14,13 @@ import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: 'Peakfijn Clothes Advisor',
   };
 
   render() {
     return (
       <View style={styles.container}>
+        
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image

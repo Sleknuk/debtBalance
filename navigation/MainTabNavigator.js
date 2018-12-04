@@ -13,6 +13,14 @@ const HomeStack = createStackNavigator({
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
+  tabBarOptions: {
+    activeTintColor: '#FF4D18',
+    inactiveTintColor: 'rgb(255, 255, 255)',
+    style: {
+      backgroundColor: 'black',
+      
+    }
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -31,6 +39,13 @@ const LinksStack = createStackNavigator({
 
 LinksStack.navigationOptions = {
   tabBarLabel: 'Links',
+  tabBarOptions: {
+    activeTintColor: '#FF4D18',
+    inactiveTintColor: 'rgb(255, 255, 255)',
+    style: {
+      backgroundColor: 'black',
+    }
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
