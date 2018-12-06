@@ -37,9 +37,9 @@ export default class LinksScreen extends React.Component {
     const humidity = this.state.humidity;
     const isLoading = !response && !temp && !humidity;
     if (response && temp && humidity) {
-      console.log(response.main);
-      console.log(temp);
-      console.log(humidity);
+      // console.log(response.main);
+      // console.log(temp);
+      // console.log(humidity);
     }
     return (
       <ScrollView style={styles.container}>
@@ -56,7 +56,7 @@ export default class LinksScreen extends React.Component {
                         </Text>
               <Text>Shirt: {
                 (temp >= 15) ? 'Wear a T-shirt' :
-                  (temp <= 15) ? 'You  need a long shirt or a sweater' :
+                  (temp <= 15) ? 'You need a long shirt or a sweater' :
                     (temp <= 5) ? 'You need a thick sweater' :
                       'Might not want to bother going outside'
               }</Text>

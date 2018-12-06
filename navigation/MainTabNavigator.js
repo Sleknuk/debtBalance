@@ -18,7 +18,8 @@ HomeStack.navigationOptions = {
     inactiveTintColor: 'rgb(255, 255, 255)',
     style: {
       backgroundColor: 'black',
-      
+      borderTopWidth: 2,
+      borderTopColor:'#FF4D18',      
     }
   },
   tabBarIcon: ({ focused }) => (
@@ -44,6 +45,8 @@ LinksStack.navigationOptions = {
     inactiveTintColor: 'rgb(255, 255, 255)',
     style: {
       backgroundColor: 'black',
+      borderTopWidth: 2,
+      borderTopColor:'#FF4D18',
     }
   },
   tabBarIcon: ({ focused }) => (
