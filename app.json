@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "newProject",
-    "slug": "newProject",
+    "name": "Peakfijn Clothes Advisor",
+    "slug": "clothes-advisor",
     "privacy": "public",
     "sdkVersion": "31.0.0",
     "platforms": [
@@ -27,6 +27,8 @@
     "android": {
       "package": "nl.maxkunkels.clothes-advisor",
       "version": 1
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/Sleknuk/Clothes-Advisor"
   }
 }
