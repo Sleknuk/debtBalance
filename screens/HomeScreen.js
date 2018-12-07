@@ -26,11 +26,12 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.title}>HomePage</Text>
+          <Text style={styles.title}>Information</Text>
         </View>
         <ScrollView contentContainerStyle={styles.mainContainer}>
           <View>
-            <Text style={styles.text}>The Clothes Advisor is an application that advices you which clothes to wear in the current weather. Imagine you want to go outside and wondering what to wear. One press on a button and the application gives an advice on what to wear. Try it out below!</Text>
+            <Text style={styles.text}>The Clothes Advisor is an application that advices you which clothes to wear in the current weather. Imagine you want to go outside and wondering what to wear. One press on a button and the application gives an advice on what to wear. </Text>
+            <Text style={styles.textOrange}>Try it out at advice below!</Text>
           </View>
         </ScrollView>
         <View style={styles.footer}>

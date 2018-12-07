@@ -5,6 +5,7 @@ import {
   Text,
   View,
   Button,
+  Image
 
 } from 'react-native';
 
@@ -28,29 +29,41 @@ export default class AdviceScreen extends React.Component {
     this.state = {
       response: null,
       temp: null,
-      humidity: null,
+      weather: null,
     };
+
+    this.fetchForecast = this.fetchForecast.bind(this);
   }
 
   componentDidMount() {
-    fetch('https://fcc-weather-api.glitch.me/api/current?lat=52.364865&lon=4.887926')
+    this.fetchForecast();
+  }
+
+  fetchForecast() {
+    this.setState({
+      response: null,
+      temp: null,
+      weather: null,
+    });
+
+    return fetch('https://api.darksky.net/forecast/1d7929e1a57a9df90f4c5f039fd66fdc/52.364865,4.887926?units=si')
       .then(response => response.json())
       .then(results => this.setState({
         response: results,
-        temp: results.main.temp,
-        humidity: results.main.humidity,
+        summary: results.hourly.summary,
+        temp: results.currently.temperature,
+        weather: results.hourly.icon,
       }));
   }
 
   render() {
     const response = this.state.response;
     const temp = this.state.temp;
-    const humidity = this.state.humidity;
-    const isLoading = !response && !temp && !humidity;
-    if (response && temp && humidity) {
-      // console.log(response.main);
-      // console.log(temp);
-      // console.log(humidity);
+    const weather = this.state.icon;
+    const isLoading = !response && !temp && !weather;
+    if (response && temp && weather) {
+      console.log(temp);
+      console.log(weather);
     }
     return (
       <View style={styles.container}>
@@ -58,7 +71,12 @@ export default class AdviceScreen extends React.Component {
           <Text style={styles.title}>Your Advice</Text>
         </View>
         <ScrollView contentContainerStyle={styles.mainContainer}>
-          <Text style={styles.text}>On this page your advise on what clothes to wear is being shown. This is based on the temperature and humidity oudside.</Text>
+          <Text style={styles.text}>
+            On this page your advise on what clothes to wear is being shown. The advice is based on the weather forecast at Peakfijn:
+          </Text>
+          <Text style={styles.textOrange}>
+            {isLoading ? 'loading.....' : response.hourly.summary} {"\n"}{"\n"}
+          </Text>
           <View>
             <Text style={styles.text}>Shirt: {
               (temp >= 15) ? 'Wear a T-shirt' :
@@ -87,32 +105,30 @@ export default class AdviceScreen extends React.Component {
                       'Might not want to bother going outside'
             }</Text>
             <Text style={styles.text}>Umbrella: {
-              (humidity >= 95) ? 'Bring an umbrella!' :
-                (humidity >= 85) ? 'There is a chance you need an umbrella' :
-                  (humidity >= 50) ? 'There is  a small chance for rain' :
+              (weather === 'rain' || 'snow' || 'hail' || 'thunderstorm' ) ? 'You should bring an umbrella' :
                     'Leave your umbrella at home, enjoy the weather'
             }
             </Text>
           </View>
           <View>
             <Text>
-              <Text style={styles.textLocation}>Peakfijn: </Text>
+              <Text style={styles.textLocation}>Peakfijn forecast: </Text>
               <Text style={styles.text}>
-                {isLoading ? 'loading.....' : response.main.temp}°C &nbsp; /
+                {isLoading ? 'loading.....' : Math.round(response.currently.temperature)}°C &nbsp;
                  </Text>
-              <Text style={styles.textOrange}>
-                &nbsp; {isLoading ? 'loading.....' : response.name} &nbsp;
-                </Text>
-              <Text style={styles.text}>
-                / &nbsp; {isLoading ? 'loading.....' : response.main.humidity}%
-                </Text>
+              <Text style={styles.textForecast}>
+                / &nbsp; {isLoading ? 'loading.....' : response.hourly.icon}
+              </Text>
             </Text>
           </View>
         </ScrollView>
         <View style={styles.footer}>
           <Button
             color='#FF4D18'
-            title="Refresh">
+            title="Refresh"
+            onPress={
+              this.fetchForecast
+            }>
           </Button>
         </View>
       </View>
@@ -139,6 +155,11 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 16,
+  },
+  textForecast: {
+    color: 'white',
+    fontSize: 16,
+    textTransform: 'uppercase',
   },
   textOrange: {
     color: '#FF4D18',
