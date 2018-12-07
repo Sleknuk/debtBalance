@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Button,
   ScrollView,
   StyleSheet,
   Text,
@@ -12,11 +11,13 @@ export default class HomeScreen extends React.Component {
     title: 'Peakfijn Clothes Advisor',
     headerStyle: {
       backgroundColor: '#FF4D18',
+      
     },
     headerTintColor: 'white',
     justifyAllignment: 'center',
     headerTitleStyle: {
       fontWeight: 'bold',
+      fontSize: 22,
       flex: 1,
     },
   };
@@ -25,10 +26,12 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.text}>HomePage</Text>
+          <Text style={styles.title}>Information</Text>
         </View>
         <ScrollView contentContainerStyle={styles.mainContainer}>
           <View>
+            <Text style={styles.text}>The Clothes Advisor is an application that advices you which clothes to wear in the current weather. Imagine you want to go outside and wondering what to wear. One press on a button and the application gives an advice on what to wear. </Text>
+            <Text style={styles.textOrange}>Try it out at advice below!</Text>
           </View>
         </ScrollView>
         <View style={styles.footer}>
@@ -48,10 +51,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: '5%',
   },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: 'white',
+    marginLeft: '5%',
+  },
   text: {
-    color: 'white'
+    color: 'white',
+    fontSize: 16,
   },
   textOrange: {
     color: '#FF4D18',
+    fontSize: 16,
   },
 });
