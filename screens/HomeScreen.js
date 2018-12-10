@@ -5,6 +5,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import Coordinates from './Coordinates';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -32,6 +33,7 @@ export default class HomeScreen extends React.Component {
           <View>
             <Text style={styles.text}>The Clothes Advisor is an application that advices you which clothes to wear in the current weather. Imagine you want to go outside and wondering what to wear. One press on a button and the application gives an advice on what to wear. </Text>
             <Text style={styles.textOrange}>Try it out at advice below!</Text>
+            <Coordinates />
           </View>
         </ScrollView>
         <View style={styles.footer}>
