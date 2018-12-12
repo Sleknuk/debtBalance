@@ -23,8 +23,6 @@ export default class AdviceScreen extends React.Component {
       weather: null,
       errorMessage: null,
       location: null,
-      place: null,
-      responsePlace: null
     };
 
     this.fetchForecast = this.fetchForecast.bind(this);
@@ -32,7 +30,6 @@ export default class AdviceScreen extends React.Component {
 
   componentDidMount() {
     this.fetchForecast();
-    // this.fetchPlace();
   };
 
   _getLocationAsync = async () => {
@@ -70,15 +67,6 @@ export default class AdviceScreen extends React.Component {
       }));
     });
   }
-
-  // fetchPlace(){
-  //   return fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=AIzaSyCBWG0dnvEiTfBoJ7rMghvnuB7P1tB5kbg`)
-  //     .then(responsePlace => responsePlace.json())
-  //     .then(results => this.setState({
-  //       responsePlace: results,
-  //       place
-  //     }));
-  //   };
 
   render() {
     const response = this.state.response;
@@ -140,7 +128,7 @@ export default class AdviceScreen extends React.Component {
               <Text style={styles.text}>
                 {isLoading ? 'loading.....' : Math.round(response.currently.temperature)}°C &nbsp;
                  </Text>
-              <Text style={styles.textForecast}>
+              <Text style={styles.text}>
                 / &nbsp; {isLoading ? 'loading.....' : response.currently.summary}
               </Text>
             </Text>
@@ -178,13 +166,8 @@ const styles = StyleSheet.create({
     color: '#FF4D18',
   },
   text: {
-    color: 'white',
+    color: '#f7f7f7',
     fontSize: 16,
-  },
-  textForecast: {
-    color: 'white',
-    fontSize: 16,
-    textTransform: 'uppercase',
   },
   textOrange: {
     color: '#FF4D18',
