@@ -8,20 +8,11 @@ import {
   Image
 
 } from 'react-native';
+import { Constants, Location, Permissions } from 'expo';
 
 export default class AdviceScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Your Advice',
-    headerStyle: {
-      backgroundColor: '#FF4D18',
-    },
-    headerTintColor: 'white',
-    justifyAllignment: 'center',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-      fontSize: 22,
-      flex: 1,
-    },
+  static navigationOptions = { 
+    header: null,
   };
   constructor(props) {
     super(props);
@@ -30,6 +21,10 @@ export default class AdviceScreen extends React.Component {
       response: null,
       temp: null,
       weather: null,
+      errorMessage: null,
+      location: null,
+      place: null,
+      responsePlace: null
     };
 
     this.fetchForecast = this.fetchForecast.bind(this);
@@ -37,24 +32,53 @@ export default class AdviceScreen extends React.Component {
 
   componentDidMount() {
     this.fetchForecast();
-  }
+    // this.fetchPlace();
+  };
 
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied',
+      });
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState({
+        location
+     });
+    }
+    
   fetchForecast() {
     this.setState({
       response: null,
       temp: null,
       weather: null,
     });
-
-    return fetch('https://api.darksky.net/forecast/1d7929e1a57a9df90f4c5f039fd66fdc/52.364865,4.887926?units=si')
+    this._getLocationAsync().then(() => {
+      const lat = this.state.location.coords.latitude;
+      const lon = this.state.location.coords.longitude;
+      return fetch(`https://api.darksky.net/forecast/1d7929e1a57a9df90f4c5f039fd66fdc/${lat},${lon}?units=si`)
       .then(response => response.json())
       .then(results => this.setState({
         response: results,
         summary: results.hourly.summary,
         temp: results.currently.temperature,
         weather: results.hourly.icon,
+      }, () => {
+        console.log('state', this.state.response.timezone)
       }));
+    });
   }
+
+  // fetchPlace(){
+  //   return fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=AIzaSyCBWG0dnvEiTfBoJ7rMghvnuB7P1tB5kbg`)
+  //     .then(responsePlace => responsePlace.json())
+  //     .then(results => this.setState({
+  //       responsePlace: results,
+  //       place
+  //     }));
+  //   };
 
   render() {
     const response = this.state.response;
@@ -68,7 +92,7 @@ export default class AdviceScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.title}>Your Advice</Text>
+          <Text style={styles.title}>Your Local Advice</Text>
         </View>
         <ScrollView contentContainerStyle={styles.mainContainer}>
           <Text style={styles.text}>
@@ -117,7 +141,7 @@ export default class AdviceScreen extends React.Component {
                 {isLoading ? 'loading.....' : Math.round(response.currently.temperature)}°C &nbsp;
                  </Text>
               <Text style={styles.textForecast}>
-                / &nbsp; {isLoading ? 'loading.....' : response.hourly.icon}
+                / &nbsp; {isLoading ? 'loading.....' : response.currently.summary}
               </Text>
             </Text>
           </View>
@@ -147,10 +171,11 @@ const styles = StyleSheet.create({
     margin: '5%',
   },
   title: {
+    textAlign: 'center',
+    paddingTop: 25,
     fontWeight: 'bold',
-    fontSize: 18,
-    color: 'white',
-    marginLeft: '5%',
+    fontSize: 26,
+    color: '#FF4D18',
   },
   text: {
     color: 'white',
