@@ -24,7 +24,6 @@ export default class AdviceScreen extends React.Component {
       errorMessage: null,
       location: null,
     };
-
     this.fetchForecast = this.fetchForecast.bind(this);
   }
 
@@ -152,7 +151,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: 'black',
+    backgroundColor: '#331d00',
   },
   mainContainer: {
     alignItems: 'center',

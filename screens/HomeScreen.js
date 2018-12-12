@@ -6,17 +6,24 @@ import {
   View,
   Button,
 } from 'react-native';
+import AdviceScreen from '../screens/AdviceScreen';
+import { createStackNavigator} from 'react-navigation';
+
+createStackNavigator(
+  {
+    Advice: AdviceScreen,
+  }
+);
+
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
 
-  
-  handleButton() {
-    console.log("Pressed Button") 
+  navigatie(){
+    AdviceStack
   }
-
 
   render() {
     return (
@@ -34,9 +41,7 @@ export default class HomeScreen extends React.Component {
         <Button
             color='#FF4D18'
             title="Try it out"
-            onPress={
-              this.handleButton
-            }>
+            onPress={() => this.props.navigation.navigate('Advice')}>
           </Button>
         </View>
       </View>
@@ -48,7 +53,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: 'black',
+    backgroundColor: '#331d00',
   },
   mainContainer: {
     alignItems: 'center',

@@ -15,11 +15,11 @@ HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarOptions: {
     activeTintColor: '#FF4D18',
-    inactiveTintColor: 'rgb(255, 255, 255)',
+    inactiveTintColor: '#515151',
     style: {
-      backgroundColor: 'black',
-      borderTopWidth: 2,
-      borderTopColor:'#FF4D18',      
+      backgroundColor: '#000000',
+      borderTopWidth: 1,
+      borderTopColor:'#f7f7f7',      
     }
   },
   tabBarIcon: ({ focused }) => (
@@ -42,11 +42,11 @@ AdviceStack.navigationOptions = {
   tabBarLabel: 'Advice',
   tabBarOptions: {
     activeTintColor: '#FF4D18',
-    inactiveTintColor: 'rgb(255, 255, 255)',
+    inactiveTintColor: '#515151',
     style: {
-      backgroundColor: 'black',
-      borderTopWidth: 2,
-      borderTopColor:'#FF4D18',
+      backgroundColor: '#000000',
+      borderTopWidth: 1,
+      borderTopColor:'#f7f7f7',
     }
   },
   tabBarIcon: ({ focused }) => (
