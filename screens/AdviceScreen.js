@@ -11,8 +11,17 @@ import {
 import { Constants, Location, Permissions } from 'expo';
 
 export default class AdviceScreen extends React.Component {
-  static navigationOptions = { 
-    header: null,
+  static navigationOptions = {
+    title: 'Your Local Advice',
+    headerStyle: {
+    backgroundColor: '#000a12',
+    },
+    headerTintColor: 'white',
+    justifyAllignment: 'center',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      flex: 1,
+    },
   };
   constructor(props) {
     super(props);
@@ -41,10 +50,10 @@ export default class AdviceScreen extends React.Component {
 
     let location = await Location.getCurrentPositionAsync({});
     this.setState({
-        location
-     });
-    }
-    
+      location
+    });
+  }
+
   fetchForecast() {
     this.setState({
       response: null,
@@ -55,15 +64,15 @@ export default class AdviceScreen extends React.Component {
       const lat = this.state.location.coords.latitude;
       const lon = this.state.location.coords.longitude;
       return fetch(`https://api.darksky.net/forecast/1d7929e1a57a9df90f4c5f039fd66fdc/${lat},${lon}?units=si`)
-      .then(response => response.json())
-      .then(results => this.setState({
-        response: results,
-        summary: results.hourly.summary,
-        temp: results.currently.temperature,
-        weather: results.hourly.icon,
-      }, () => {
-        console.log('state', this.state.response.timezone)
-      }));
+        .then(response => response.json())
+        .then(results => this.setState({
+          response: results,
+          summary: results.hourly.summary,
+          temp: results.currently.temperature,
+          weather: results.hourly.icon,
+        }, () => {
+          console.log('state', this.state.response.timezone)
+        }));
     });
   }
 
@@ -78,14 +87,11 @@ export default class AdviceScreen extends React.Component {
     }
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Your Local Advice</Text>
-        </View>
         <ScrollView contentContainerStyle={styles.mainContainer}>
           <Text style={styles.text}>
-            On this page your advise on what clothes to wear is being shown. The advice is based on the weather forecast at Peakfijn:
+          On this page your advice on what clothes to wear is being shown. The advice is based on the weather forecast of the upcoming 24 hours:
           </Text>
-          <Text style={styles.textOrange}>
+          <Text style={styles.textBlue}>
             {isLoading ? 'loading.....' : response.hourly.summary} {"\n"}{"\n"}
           </Text>
           <View>
@@ -116,14 +122,14 @@ export default class AdviceScreen extends React.Component {
                       'Might not want to bother going outside'
             }</Text>
             <Text style={styles.text}>Umbrella: {
-              (weather === 'rain' || 'snow' || 'hail' || 'thunderstorm' ) ? 'You should bring an umbrella' :
-                    'Leave your umbrella at home, enjoy the weather'
+              (weather === 'rain' || 'snow' || 'hail' || 'thunderstorm') ? 'You should bring an umbrella' :
+                'Leave your umbrella at home, enjoy the weather'
             }
             </Text>
           </View>
           <View>
             <Text>
-              <Text style={styles.textLocation}>Peakfijn forecast: </Text>
+              <Text style={styles.textLocation}>Current weather: </Text>
               <Text style={styles.text}>
                 {isLoading ? 'loading.....' : Math.round(response.currently.temperature)}°C &nbsp;
                  </Text>
@@ -135,7 +141,7 @@ export default class AdviceScreen extends React.Component {
         </ScrollView>
         <View style={styles.footer}>
           <Button
-            color='#FF4D18'
+            color='#1e88e5'
             title="Refresh"
             onPress={
               this.fetchForecast
@@ -151,29 +157,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#331d00',
+    backgroundColor: '#263238',
   },
   mainContainer: {
     alignItems: 'center',
     margin: '5%',
   },
-  title: {
-    textAlign: 'center',
-    paddingTop: 25,
-    fontWeight: 'bold',
-    fontSize: 26,
-    color: '#FF4D18',
-  },
   text: {
     color: '#f7f7f7',
     fontSize: 16,
   },
-  textOrange: {
-    color: '#FF4D18',
+  textBlue: {
+    color: '#6ab7ff',
     fontSize: 16,
   },
   textLocation: {
-    color: '#FF4D18',
+    color: '#6ab7ff',
     fontSize: 16,
     fontWeight: 'bold',
   },

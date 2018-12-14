@@ -18,7 +18,16 @@ createStackNavigator(
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: 'Peakfijn Clothes Advisor',
+    headerStyle: {
+    backgroundColor: '#000a12',
+    },
+    headerTintColor: 'white',
+    justifyAllignment: 'center',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      flex: 1,
+    },
   };
 
   navigatie(){
@@ -28,9 +37,6 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Peakfijn Clothes Advisor</Text>
-        </View>
         <ScrollView contentContainerStyle={styles.mainContainer}>
           <View>
             <Text style={styles.text}>The Clothes Advisor is an application that advices you which clothes to wear in the current weather. Imagine you want to go outside and wondering what to wear. One press on a button and the application gives an advice on what to wear. {"\n"}</Text>
@@ -39,7 +45,7 @@ export default class HomeScreen extends React.Component {
         </ScrollView>
         <View style={styles.footer}>
         <Button
-            color='#FF4D18'
+            color='#1e88e5'
             title="Try it out"
             onPress={() => this.props.navigation.navigate('Advice')}>
           </Button>
@@ -53,18 +59,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#331d00',
+    backgroundColor: '#263238',
   },
   mainContainer: {
     alignItems: 'center',
     margin: '5%',
-  },
-  title: {
-    textAlign: 'center',
-    paddingTop: 25,
-    fontWeight: 'bold',
-    fontSize: 26,
-    color: '#FF4D18',
   },
   text: {
     color: '#f7f7f7',

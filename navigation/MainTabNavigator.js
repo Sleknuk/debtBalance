@@ -5,6 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import AdviceScreen from '../screens/AdviceScreen';
+import colors from '../constants/Colors';
 
 
 const HomeStack = createStackNavigator({
@@ -14,13 +15,12 @@ const HomeStack = createStackNavigator({
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarOptions: {
-    activeTintColor: '#FF4D18',
-    inactiveTintColor: '#515151',
+    activeTintColor: 'white',
+    activeBackgroundColor: '#5b6972',
+    inactiveTintColor: '#777777',
     style: {
-      backgroundColor: '#000000',
-      borderTopWidth: 1,
-      borderTopColor:'#f7f7f7',      
-    }
+      backgroundColor: '#4f5b62',
+    },
   },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -41,12 +41,11 @@ const AdviceStack = createStackNavigator({
 AdviceStack.navigationOptions = {
   tabBarLabel: 'Advice',
   tabBarOptions: {
-    activeTintColor: '#FF4D18',
-    inactiveTintColor: '#515151',
+    activeTintColor: 'white',
+    activeBackgroundColor: '#5b6972',
+    inactiveTintColor: '#777777',
     style: {
-      backgroundColor: '#000000',
-      borderTopWidth: 1,
-      borderTopColor:'#f7f7f7',
+      backgroundColor: '#4f5b62',
     }
   },
   tabBarIcon: ({ focused }) => (
