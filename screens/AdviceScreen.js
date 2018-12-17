@@ -94,9 +94,8 @@ export default class AdviceScreen extends React.Component {
           <View>
             {isLoading ?
               <ActivityIndicator
-                style={{ height: 80 }}
-                color="#C00"
-                size="large"
+                color="#005cb2"
+                size= 'large'
               /> : <View>
                 <Text style={styles.textBlue}>
                   {response.hourly.summary} {"\n"}{"\n"}
@@ -129,7 +128,7 @@ export default class AdviceScreen extends React.Component {
                             'Might not want to bother going outside'
                   }</Text>
                   <Text style={styles.text}>Umbrella: {
-                    (weather === 'rain' || 'snow' || 'hail' || 'thunderstorm') ? 'You should bring an umbrella' :
+                    (response.currently.precipType === 'rain' || 'snow' || 'sleet') ? 'You should bring an umbrella' :
                       'Leave your umbrella at home, enjoy the weather'
                   }
                   </Text>
@@ -141,7 +140,7 @@ export default class AdviceScreen extends React.Component {
                       {Math.round(response.currently.temperature)}°C &nbsp;
                  </Text>
                     <Text style={styles.text}>
-                      / &nbsp; {response.currently.summary}
+                      / &nbsp; {response.currently.precipType.toUpperCase()}
                     </Text>
                   </Text>
                 </View>
