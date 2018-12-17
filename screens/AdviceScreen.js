@@ -5,17 +5,20 @@ import {
   Text,
   View,
   Button,
+  ImageBackground,
   ActivityIndicator
 
 } from 'react-native';
 import { Constants, Location, Permissions } from 'expo';
 
+
 export default class AdviceScreen extends React.Component {
   static navigationOptions = {
-    title: 'Your Local Advice',
+    title: 'Your Advice',
     headerStyle: {
-      backgroundColor: '#000a12',
+      backgroundColor: 'rgba(0,0,0,0.4)',
     },
+    headerTransparent: true,
     headerTintColor: 'white',
     justifyAllignment: 'center',
     headerTitleStyle: {
@@ -40,9 +43,9 @@ export default class AdviceScreen extends React.Component {
     this.fetchForecast();
   };
 
-  Capitalize(str){
+  Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
-    }
+  }
 
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -91,78 +94,90 @@ export default class AdviceScreen extends React.Component {
     }
     return (
       <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.mainContainer}>
-          <Text style={styles.text}>
-            On this page your advice on what clothes to wear is being shown. The advice is based on the weather forecast of the upcoming 24 hours:
+        <ImageBackground
+          style={{
+            flex: 1,
+            resizeMode: 'cover',
+            width: '100%',
+            height: '100%',
+            justifyContent: 'center',
+          }}
+          source={require('../constants/snowDark.png')}
+        >
+          <ScrollView contentContainerStyle={styles.mainContainer}>
+            <Text style={styles.text}>
+              On this page your advice on what clothes to wear is being shown. The advice is based on the weather forecast of the upcoming 24 hours:
           </Text>
-          <View>
-            {isLoading ?
-              <ActivityIndicator
-                color="#005cb2"
-                size= 'large'
-              /> : <View>
-                <Text style={styles.textBlue}>
-                  {response.hourly.summary} {"\n"}{"\n"}
-                </Text>
-                <View>
-                  <Text style={styles.text}>Shirt: {
-                    (temp >= 15) ? 'Wear a T-shirt' :
-                      (temp <= 15) ? 'You need a long shirt or a sweater' :
-                        (temp <= 5) ? 'You need a thick sweater' :
-                          'Might not want to bother going outside'
-                  }</Text>
-                  <Text style={styles.text}>Jacket: {
-                    (temp >= 20) ? 'Leave your jackets at home!' :
-                      (temp >= 15) ? 'Bring a summer jacket' :
-                        (temp <= 8) ? 'Wear a winter jacket' :
-                          (temp <= 15) ? 'You need your jacket' :
-                            'Might not want to bother going outside'
-                  }</Text>
-                  <Text style={styles.text}>Jeans: {
-                    (temp <= 5) ? 'You need pretty warm pants' :
-                      (temp <= 20) ? 'Wear long jeans' :
-                        (temp >= 20) ? 'Wear shorts' :
-                          'Might not want to bother going outside'
-                  }</Text>
-                  <Text style={styles.text}>Shoes: {
-                    (temp <= 5) ? 'Wear some warm shoes' :
-                      (temp <= 15) ? 'Wear closed shoes' :
-                        (temp <= 20) ? 'Wear some breatheable sneakers' :
-                          (temp >= 20) ? 'You can wear open slippers or breatheeable sneakers' :
-                            'Might not want to bother going outside'
-                  }</Text>
-                  <Text style={styles.text}>Umbrella: {
-                    (response.currently.precipType === 'rain' || 'snow' || 'sleet') ? 'You should bring an umbrella' :
-                      'Leave your umbrella at home, enjoy the weather'
-                  }
+            <View>
+              {isLoading ?
+                <ActivityIndicator
+                  color="#005cb2"
+                  size='large'
+                /> : <View>
+                  <Text style={styles.textBlue}>
+                    {response.hourly.summary} {"\n"}{"\n"}
                   </Text>
-                </View>
-                <View>
-                  <Text>
-                    <Text style={styles.textLocation}>Current weather: </Text>
-                    <Text style={styles.text}>
-                      {Math.round(response.currently.temperature)}°C &nbsp;
-                 </Text>
-                    <Text style={styles.text}>
-                      / &nbsp; {this.Capitalize(response.currently.precipType)}
+                  <View>
+                    <Text style={styles.text}>Shirt: {
+                      (temp >= 15) ? 'Wear a T-shirt' :
+                        (temp <= 15) ? 'You need a long shirt or a sweater' :
+                          (temp <= 5) ? 'You need a thick sweater' :
+                            'Might not want to bother going outside'
+                    }</Text>
+                    <Text style={styles.text}>Jacket: {
+                      (temp >= 20) ? 'Leave your jackets at home!' :
+                        (temp >= 15) ? 'Bring a summer jacket' :
+                          (temp <= 8) ? 'Wear a winter jacket' :
+                            (temp <= 15) ? 'You need your jacket' :
+                              'Might not want to bother going outside'
+                    }</Text>
+                    <Text style={styles.text}>Jeans: {
+                      (temp <= 5) ? 'You need pretty warm pants' :
+                        (temp <= 20) ? 'Wear long jeans' :
+                          (temp >= 20) ? 'Wear shorts' :
+                            'Might not want to bother going outside'
+                    }</Text>
+                    <Text style={styles.text}>Shoes: {
+                      (temp <= 5) ? 'Wear some warm shoes' :
+                        (temp <= 15) ? 'Wear closed shoes' :
+                          (temp <= 20) ? 'Wear some breatheable sneakers' :
+                            (temp >= 20) ? 'You can wear open slippers or breatheeable sneakers' :
+                              'Might not want to bother going outside'
+                    }</Text>
+                    <Text style={styles.text}>Umbrella: {
+                      (response.currently.precipType === 'rain' || 'snow' || 'sleet') ? 'You should bring an umbrella' :
+                        'Leave your umbrella at home, enjoy the weather'
+                    }
                     </Text>
-                  </Text>
+                  </View>
+                  <View>
+                    <Text>
+                      <Text style={styles.textLocation}>Current weather: </Text>
+                      <Text style={styles.text}>
+                        {Math.round(response.currently.temperature)}°C &nbsp;
+                 </Text>
+                      <Text style={styles.text}>
+                        / &nbsp; {this.Capitalize(response.currently.precipType)}
+                      </Text>
+                    </Text>
+                  </View>
                 </View>
-              </View>
-            }
+              }
 
+            </View>
+          </ScrollView>
+          <View style={styles.footer}>
+            <Button
+              color='#1e88e5'
+              title="Refresh"
+              onPress={
+                this.fetchForecast
+              }>
+            </Button>
           </View>
-        </ScrollView>
-        <View style={styles.footer}>
-          <Button
-            color='#1e88e5'
-            title="Refresh"
-            onPress={
-              this.fetchForecast
-            }>
-          </Button>
-        </View>
+        </ImageBackground>
       </View>
+
     );
   }
 }
@@ -170,10 +185,10 @@ export default class AdviceScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
     backgroundColor: '#263238',
   },
   mainContainer: {
+    paddingTop: 95,
     alignItems: 'center',
     margin: '5%',
   },

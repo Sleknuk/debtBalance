@@ -40,7 +40,7 @@ const AdviceStack = createStackNavigator({
 });
 
 AdviceStack.navigationOptions = {
-  tabBarLabel: 'Advice'.toUpperCase(),
+  tabBarLabel: 'Advice',
   tabBarOptions: {
     activeTintColor: 'white',
     activeBackgroundColor: '#5b6972',
