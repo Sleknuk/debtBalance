@@ -13,13 +13,14 @@ const HomeStack = createStackNavigator({
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: 'Home'.toUpperCase(),
   tabBarOptions: {
     activeTintColor: 'white',
     activeBackgroundColor: '#5b6972',
     inactiveTintColor: '#777777',
     style: {
       backgroundColor: '#4f5b62',
+      fontWeight: 'bold',
     },
   },
   tabBarIcon: ({ focused }) => (
@@ -39,13 +40,14 @@ const AdviceStack = createStackNavigator({
 });
 
 AdviceStack.navigationOptions = {
-  tabBarLabel: 'Advice',
+  tabBarLabel: 'Advice'.toUpperCase(),
   tabBarOptions: {
     activeTintColor: 'white',
     activeBackgroundColor: '#5b6972',
     inactiveTintColor: '#777777',
     style: {
       backgroundColor: '#4f5b62',
+      fontWeight: 'bold',
     }
   },
   tabBarIcon: ({ focused }) => (

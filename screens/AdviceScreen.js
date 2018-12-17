@@ -40,6 +40,10 @@ export default class AdviceScreen extends React.Component {
     this.fetchForecast();
   };
 
+  Capitalize(str){
+    return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
@@ -140,7 +144,7 @@ export default class AdviceScreen extends React.Component {
                       {Math.round(response.currently.temperature)}°C &nbsp;
                  </Text>
                     <Text style={styles.text}>
-                      / &nbsp; {response.currently.precipType.toUpperCase()}
+                      / &nbsp; {this.Capitalize(response.currently.precipType)}
                     </Text>
                   </Text>
                 </View>
