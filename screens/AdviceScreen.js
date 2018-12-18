@@ -33,6 +33,7 @@ export default class AdviceScreen extends React.Component {
       response: null,
       temp: null,
       weather: null,
+      background: null,
       errorMessage: null,
       location: null,
     };
@@ -43,9 +44,9 @@ export default class AdviceScreen extends React.Component {
     this.fetchForecast();
   };
 
-  Capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
+  // Capitalize(str) {
+  //   return str.charAt(0).toUpperCase() + str.slice(1);
+  // }
 
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -77,8 +78,9 @@ export default class AdviceScreen extends React.Component {
           summary: results.hourly.summary,
           temp: results.currently.temperature,
           weather: results.hourly.icon,
+          background: results.currently.precipType,
         }, () => {
-          console.log('state', this.state.response.timezone)
+          console.log('state')
         }));
     });
   }
@@ -87,6 +89,7 @@ export default class AdviceScreen extends React.Component {
     const response = this.state.response;
     const temp = this.state.temp;
     const weather = this.state.icon;
+    const background = this.state.background;
     const isLoading = !response && !temp && !weather;
     if (response && temp && weather) {
       console.log(temp);
@@ -102,7 +105,14 @@ export default class AdviceScreen extends React.Component {
             height: '100%',
             justifyContent: 'center',
           }}
-          source={require('../constants/snowDark.png')}
+          source={ isLoading ? require('../constants/background.png') :
+            (background == 'rain') ? require('../constants/rainDark.png') :
+            (background == 'snow') ? require('../constants/snowDark.png') :
+              (background == 'sleet') ? require('../constants/sleetDark.png') :
+                (background == null) ? require('../constants/clearDark.png') :
+                 console.log('error')
+                  
+          }
         >
           <ScrollView contentContainerStyle={styles.mainContainer}>
             <Text style={styles.text}>
@@ -145,19 +155,19 @@ export default class AdviceScreen extends React.Component {
                               'Might not want to bother going outside'
                     }</Text>
                     <Text style={styles.text}>Umbrella: {
-                      (response.currently.precipType === 'rain' || 'snow' || 'sleet') ? 'You should bring an umbrella' :
-                        'Leave your umbrella at home, enjoy the weather'
+                      (response.daily.data[0].precipProbability >= 0.50) ? 'You should bring an umbrella' :
+                        "You won't need it"
                     }
                     </Text>
                   </View>
-                  <View>
+                  <View style={styles.textData}>
                     <Text>
-                      <Text style={styles.textLocation}>Current weather: </Text>
-                      <Text style={styles.text}>
+                      <Text style={styles.textLocation}>Temperature / Precipitate: </Text>
+                      <Text style={styles.textData}>
                         {Math.round(response.currently.temperature)}°C &nbsp;
-                 </Text>
-                      <Text style={styles.text}>
-                        / &nbsp; {this.Capitalize(response.currently.precipType)}
+                      </Text>
+                      <Text style={styles.textData}>
+                        / &nbsp; {Math.round(response.daily.data[0].precipProbability * 100)}%
                       </Text>
                     </Text>
                   </View>
@@ -199,11 +209,19 @@ const styles = StyleSheet.create({
   textBlue: {
     color: '#6ab7ff',
     fontSize: 16,
+    textAlign: 'center',
   },
   textLocation: {
     color: '#6ab7ff',
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  textData: {
+    color: '#f7f7f7',
+    fontSize: 16,
+    alignItems: 'center',
+    margin: '5%',
   },
   footer: {
     paddingTop: 5,
