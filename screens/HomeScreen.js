@@ -68,10 +68,12 @@ const styles = StyleSheet.create({
   text: {
     color: '#f7f7f7',
     fontSize: 16,
+    lineHeight: 24,
   },
   textBold: {
+    paddingTop: 15,
     color: '#ffffff',
-    fontSize: 17,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   footer: {

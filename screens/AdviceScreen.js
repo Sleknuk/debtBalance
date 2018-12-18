@@ -105,19 +105,20 @@ export default class AdviceScreen extends React.Component {
             height: '100%',
             justifyContent: 'center',
           }}
-          source={ isLoading ? require('../constants/background.png') :
+          source={isLoading ? require('../constants/background.png') :
             (background == 'rain') ? require('../constants/rainDark.png') :
-            (background == 'snow') ? require('../constants/snowDark.png') :
-              (background == 'sleet') ? require('../constants/sleetDark.png') :
-                (background == null) ? require('../constants/clearDark.png') :
-                 console.log('error')
-                  
+              (background == 'snow') ? require('../constants/snowDark.png') :
+                (background == 'sleet') ? require('../constants/sleetDark.png') :
+                  (background == null) ? require('../constants/clearDark.png') :
+                    console.log('error')
+
           }
         >
           <ScrollView contentContainerStyle={styles.mainContainer}>
             <Text style={styles.text}>
               On this page your advice on what clothes to wear is being shown. The advice is based on the weather forecast of the upcoming 24 hours:
-          </Text>
+              {"\n"}
+            </Text>
             <View>
               {isLoading ?
                 <ActivityIndicator
@@ -167,7 +168,7 @@ export default class AdviceScreen extends React.Component {
                         {Math.round(response.currently.temperature)}°C &nbsp;
                       </Text>
                       <Text style={styles.textData}>
-                        / &nbsp; {Math.round(response.daily.data[0].precipProbability * 100)}%
+                        /&nbsp; {Math.round(response.daily.data[0].precipProbability * 100)}%
                       </Text>
                     </Text>
                   </View>
@@ -205,6 +206,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#f7f7f7',
     fontSize: 16,
+    lineHeight: 24,
   },
   textBlue: {
     color: '#6ab7ff',
