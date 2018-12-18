@@ -12,8 +12,8 @@
     "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -27,7 +27,7 @@
     "android": {
       "package": "nl.maxkunkels.clothesAdvisor"
     },
-    "description": "",
+    "description": "The Clothes Advisor is an application that advices you which clothes to wear in the current weather. Imagine you want to go outside and wondering what to wear. One press on a button and the application gives an advice on what to wear. ",
     "githubUrl": "https://github.com/Sleknuk/Clothes-Advisor"
   }
 }
