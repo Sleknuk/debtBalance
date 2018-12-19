@@ -20,7 +20,7 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Peakfijn Clothes Advisor',
     headerStyle: {
-    backgroundColor: '#000a12',
+    backgroundColor: '#37474f',
     },
     headerTintColor: 'white',
     justifyAllignment: 'center',
@@ -45,7 +45,7 @@ export default class HomeScreen extends React.Component {
         </ScrollView>
         <View style={styles.footer}>
         <Button
-            color='#1e88e5'
+            color='#FF4D18'
             title="Try it out"
             onPress={() => this.props.navigation.navigate('Advice')}>
           </Button>
@@ -59,22 +59,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#263238',
+    backgroundColor: '#d1d1d1',
   },
   mainContainer: {
     alignItems: 'center',
     margin: '5%',
   },
   text: {
-    color: '#f7f7f7',
-    fontSize: 16,
-    lineHeight: 24,
+    color: '#000000',
+    fontSize: 20,
+    lineHeight: 30,
   },
   textBold: {
     paddingTop: 15,
-    color: '#ffffff',
-    fontSize: 18,
-    fontWeight: 'bold',
+    color: '#000000',
+    fontSize: 24,
   },
   footer: {
     borderRadius: 2,

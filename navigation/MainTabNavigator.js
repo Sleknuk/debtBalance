@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 import TabBarIcon from '../components/TabBarIcon';
+import Icon from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screens/HomeScreen';
 import AdviceScreen from '../screens/AdviceScreen';
 import colors from '../constants/Colors';
+
+
+// export default class App extends Component {
+//   render(){
+//     return(
+
+//     )
+//   }
+// }
+
 
 
 const HomeStack = createStackNavigator({
@@ -13,26 +25,15 @@ const HomeStack = createStackNavigator({
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home'.toUpperCase(),
-  tabBarOptions: {
-    activeTintColor: 'white',
-    activeBackgroundColor: '#5b6972',
-    inactiveTintColor: '#777777',
-    style: {
-      backgroundColor: '#4f5b62',
-      fontWeight: 'bold',
-    },
+  tabBarLabel: 'Home',
+  tabBarColor: '#842655',
+  style: {
+    backgroundColor: '#62727b',
+    fontWeight: 'bold',
   },
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
+  tabBarIcon: ({ tintColor, focused }) => (
+    <Icon size={25} name={Platform.OS === 'ios' ? (focused ? 'ios-information-circle' : 'ios-information-circle-outline') : 'md-information-circle'} style={{ color: tintColor }} />
+  )
 };
 
 const AdviceStack = createStackNavigator({
@@ -41,24 +42,41 @@ const AdviceStack = createStackNavigator({
 
 AdviceStack.navigationOptions = {
   tabBarLabel: 'Advice',
-  tabBarOptions: {
-    activeTintColor: 'white',
-    activeBackgroundColor: '#5b6972',
-    inactiveTintColor: '#777777',
-    style: {
-      backgroundColor: '#4f5b62',
-      fontWeight: 'bold',
-    }
+  tabBarColor: '#ff3838',
+  style: {
+    backgroundColor: '#62727b',
+    fontWeight: 'bold',
   },
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-umbrella'}
-    />
-  ),
+  tabBarIcon: ({ tintColor, focused }) => (
+    <Icon size={25} name={Platform.OS === 'ios' ? (focused ? 'ios-umbrella' : 'ios-umbrella') : 'md-umbrella'} style={{ color: tintColor }} />
+  )
 };
 
-export default createBottomTabNavigator({
+export default createMaterialTopTabNavigator({
   HomeStack,
   AdviceStack,
-});
+},
+  {
+    tabBarPosition: 'bottom',
+    tabBarOptions: {
+      activeTintColor: '#FF4D18',
+      inactiveTintColor: 'grey',
+      labelStyles:{ fontSize: 15 },
+      style: {
+        backgroundColor: '#d1d1d1',
+
+      },
+      indicatorStyle: {
+        height: 2,
+        backgroundColor: '#FF4D18',
+      },
+      allowFontScaling: false,
+      showIcon: true,
+      shifting: true,
+    },
+
+
+
+
+  }
+);

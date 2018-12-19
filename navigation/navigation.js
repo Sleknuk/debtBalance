@@ -1,31 +1,38 @@
 import React, { Component } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View
-} from 'react-native';
+import { Platform } from 'react-native';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-// Navigators
-import { createBottomTabNavigator } from 'react-navigation'
-
-// import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import AdviceScreen from '../screens/AdviceScreen';
-// import colors from '../constants/Colors';
 
-export default createBottomTabNavigator({
-    HomeScreen,
-    AdviceScreen
-},
+
+export default createMaterialBottomTabNavigator(
     {
-        animationEnabled: true,
-        tabBarOptions: {
-            activeTintColor: '#e91e63',
-            labelStyle: {
-                fontSize: 12,
-            },
-            style: {
-                backgroundColor: 'blue',
-            },
+        Home: {
+            screen: HomeScreen,
+            navigationOptions: {
+                tabBarLabel: 'Home',
+                tabBarColor: '#842655',
+                tabBarIcon: ({ tintColor, focused }) => (
+                    <Icon size={25} name={Platform.OS === 'ios' ? (focused ? 'ios-home' : 'ios-home-outline') : 'md-home'} style={{ color: tintColor }} />
+                )
+            }
+        },
+        Settings: {
+            screen: AdviceScreen,
+            navigationOptions: {
+                tabBarLabel: 'Settings',
+                tabBarColor: '#ff3838',
+                tabBarIcon: ({ tintColor, focused }) => (
+                    <Icon size={25} name={Platform.OS === 'ios' ? (focused ? 'ios-settings' : 'ios-settings-outline') : 'md-settings'} style={{ color: tintColor }} />
+                )
+            }
         }
-    })
+    },
+    {
+        shifting: true,
+        activeTintColor: 'white',
+        inactiveTintColor: '#ddd',
+    }
+);

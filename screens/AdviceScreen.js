@@ -16,7 +16,7 @@ export default class AdviceScreen extends React.Component {
   static navigationOptions = {
     title: 'Your Advice',
     headerStyle: {
-      backgroundColor: 'rgba(0,0,0,0.4)',
+      backgroundColor: 'rgba(55, 71, 79, 1)',
     },
     headerTransparent: true,
     headerTintColor: 'white',
@@ -122,10 +122,10 @@ export default class AdviceScreen extends React.Component {
             <View>
               {isLoading ?
                 <ActivityIndicator
-                  color="#005cb2"
+                  color="#FF4D18"
                   size='large'
                 /> : <View>
-                  <Text style={styles.textBlue}>
+                  <Text style={styles.textOrange}>
                     {response.hourly.summary} {"\n"}{"\n"}
                   </Text>
                   <View>
@@ -163,8 +163,10 @@ export default class AdviceScreen extends React.Component {
                   </View>
                   <View style={styles.textData}>
                     <Text>
-                      <Text style={styles.textLocation}>Temperature / Precipitate: </Text>
-                      <Text style={styles.textData}>
+                      <Text style={styles.textLocation}>Temperature / Precipitate</Text>
+                    </Text>
+                    <Text>
+                    <Text style={styles.textData}>
                         {Math.round(response.currently.temperature)}°C &nbsp;
                       </Text>
                       <Text style={styles.textData}>
@@ -179,7 +181,7 @@ export default class AdviceScreen extends React.Component {
           </ScrollView>
           <View style={styles.footer}>
             <Button
-              color='#1e88e5'
+              color='#FF4D18'
               title="Refresh"
               onPress={
                 this.fetchForecast
@@ -196,7 +198,7 @@ export default class AdviceScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#263238',
+    backgroundColor: '#d1d1d1',
   },
   mainContainer: {
     paddingTop: 95,
@@ -204,25 +206,28 @@ const styles = StyleSheet.create({
     margin: '5%',
   },
   text: {
-    color: '#f7f7f7',
-    fontSize: 16,
-    lineHeight: 24,
+    color: '#000000',
+    fontSize: 20,
+    lineHeight: 30,
+    // fontWeight: 'bold',
   },
-  textBlue: {
-    color: '#6ab7ff',
-    fontSize: 16,
+  textOrange: {
+    color: '#661700',
+    fontSize: 20,
     textAlign: 'center',
+    // fontWeight: 'bold',
   },
   textLocation: {
-    color: '#6ab7ff',
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: '#661700',
+    fontSize: 20,
+    // fontWeight: 'bold',
     textAlign: 'center',
   },
   textData: {
-    color: '#f7f7f7',
-    fontSize: 16,
+    color: '#000000',
+    fontSize: 20,
     alignItems: 'center',
+    // fontWeight: 'bold',
     margin: '5%',
   },
   footer: {
