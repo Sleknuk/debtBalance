@@ -16,7 +16,7 @@ export default class AdviceScreen extends React.Component {
   static navigationOptions = {
     title: 'Your Advice',
     headerStyle: {
-      backgroundColor: 'rgba(55, 71, 79, 1)',
+      backgroundColor: '#37474f',
     },
     headerTransparent: true,
     headerTintColor: 'white',
@@ -43,10 +43,6 @@ export default class AdviceScreen extends React.Component {
   componentDidMount() {
     this.fetchForecast();
   };
-
-  // Capitalize(str) {
-  //   return str.charAt(0).toUpperCase() + str.slice(1);
-  // }
 
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -105,11 +101,11 @@ export default class AdviceScreen extends React.Component {
             height: '100%',
             justifyContent: 'center',
           }}
-          source={isLoading ? require('../constants/background.png') :
-            (background == 'rain') ? require('../constants/rainDark.png') :
-              (background == 'snow') ? require('../constants/snowDark.png') :
-                (background == 'sleet') ? require('../constants/sleetDark.png') :
-                  (background == null) ? require('../constants/clearDark.png') :
+          source={isLoading ? require('../assets/backgrounds/background.png') :
+            (background == 'rain') ? require('../assets/backgrounds/rainDark.png') :
+              (background == 'snow') ? require('../assets/backgrounds/snowDark.png') :
+                (background == 'sleet') ? require('../assets/backgrounds/sleetDark.png') :
+                  (background == null) ? require('../assets/backgrounds/clearDark.png') :
                     console.log('error')
 
           }
@@ -209,25 +205,21 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 20,
     lineHeight: 30,
-    // fontWeight: 'bold',
   },
   textOrange: {
     color: '#661700',
     fontSize: 20,
     textAlign: 'center',
-    // fontWeight: 'bold',
   },
   textLocation: {
     color: '#661700',
     fontSize: 20,
-    // fontWeight: 'bold',
     textAlign: 'center',
   },
   textData: {
     color: '#000000',
     fontSize: 20,
     alignItems: 'center',
-    // fontWeight: 'bold',
     margin: '5%',
   },
   footer: {
