@@ -6,6 +6,7 @@ import {
   View,
   Button,
   ImageBackground,
+  Image,
   ActivityIndicator
 
 } from 'react-native';
@@ -17,14 +18,16 @@ export default class AdviceScreen extends React.Component {
     title: 'Your Advice',
     headerStyle: {
       backgroundColor: '#37474f',
+      height: 60,
     },
-    headerTransparent: true,
     headerTintColor: 'white',
     justifyAllignment: 'center',
     headerTitleStyle: {
       fontWeight: 'bold',
       flex: 1,
     },
+    headerLeft:
+      (<View style={{ paddingLeft: 15 }}><Image style={{ width: 45, height: 45, flex: 1 }} resizeMode="contain" source={require('../assets/images/icon.png')} /></View>)
   };
   constructor(props) {
     super(props);
@@ -194,10 +197,10 @@ export default class AdviceScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d1d1d1',
+    backgroundColor: '#ffffff',
   },
   mainContainer: {
-    paddingTop: 95,
+    paddingTop: 15,
     alignItems: 'center',
     margin: '5%',
   },

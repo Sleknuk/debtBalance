@@ -5,9 +5,10 @@ import {
   Text,
   View,
   Button,
+  Image
 } from 'react-native';
 import AdviceScreen from '../screens/AdviceScreen';
-import { createStackNavigator} from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 createStackNavigator(
   {
@@ -18,9 +19,12 @@ createStackNavigator(
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Peakfijn Clothes Advisor',
+    headerTitle: 'Clothes Advisor',
     headerStyle: {
-    backgroundColor: '#37474f',
+      textAlign : 'left',
+      backgroundColor: '#37474f',
+      height: 60,
+      textAlign: 'left',
     },
     headerTintColor: 'white',
     justifyAllignment: 'center',
@@ -28,9 +32,11 @@ export default class HomeScreen extends React.Component {
       fontWeight: 'bold',
       flex: 1,
     },
+    headerLeft:
+      (<View style={{ paddingLeft: 15 }}><Image style={{ width: 45, height: 45, flex: 1 }} resizeMode="contain" source={require('../assets/images/icon.png')} /></View>)
   };
 
-  navigatie(){
+  navigatie() {
     AdviceStack
   }
 
@@ -44,7 +50,7 @@ export default class HomeScreen extends React.Component {
           </View>
         </ScrollView>
         <View style={styles.footer}>
-        <Button
+          <Button
             color='#FF4D18'
             title="Try it out"
             onPress={() => this.props.navigation.navigate('Advice')}>
@@ -59,7 +65,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#d1d1d1',
+    backgroundColor: '#ffffff',
   },
   mainContainer: {
     alignItems: 'center',
