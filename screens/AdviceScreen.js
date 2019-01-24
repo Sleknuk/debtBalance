@@ -7,7 +7,8 @@ import {
   Button,
   ImageBackground,
   Image,
-  ActivityIndicator
+  ActivityIndicator,
+  RefreshControl
 
 } from 'react-native';
 import { Constants, Location, Permissions } from 'expo';
@@ -39,6 +40,7 @@ export default class AdviceScreen extends React.Component {
       background: null,
       errorMessage: null,
       location: null,
+      refreshing: false,
     };
     this.fetchForecast = this.fetchForecast.bind(this);
   }
@@ -66,11 +68,12 @@ export default class AdviceScreen extends React.Component {
       response: null,
       temp: null,
       weather: null,
+      refreshing: true,
     });
     this._getLocationAsync().then(() => {
       const lat = this.state.location.coords.latitude;
       const lon = this.state.location.coords.longitude;
-      return fetch(`https://api.darksky.net/forecast/'YOUR_API_KEY'/${lat},${lon}?units=si`)
+      return fetch(`https://api.darksky.net/forecast/1d7929e1a57a9df90f4c5f039fd66fdc/${lat},${lon}?units=si`)
         .then(response => response.json())
         .then(results => this.setState({
           response: results,
@@ -78,8 +81,9 @@ export default class AdviceScreen extends React.Component {
           temp: results.currently.temperature,
           weather: results.hourly.icon,
           background: results.currently.precipType,
+          refreshing: false,
         }, () => {
-          console.log('state')
+          console.log(`https://api.darksky.net/forecast/1d7929e1a57a9df90f4c5f039fd66fdc/${lat},${lon}?units=si`);
         }));
     });
   }
@@ -113,72 +117,75 @@ export default class AdviceScreen extends React.Component {
 
           }
         >
-          <ScrollView contentContainerStyle={styles.mainContainer}>
-            <Text style={styles.text}>
-              On this page your advice on what clothes to wear is being shown. The advice is based on the weather forecast of the upcoming 24 hours:
+        <ScrollView contentContainerStyle={styles.mainContainer}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this.fetchForecast}
+              />} >
+          <Text style={styles.text}>
+            On this page your advice on what clothes to wear is being shown. The advice is based on the weather forecast of the upcoming 24 hours:
               {"\n"}
-            </Text>
-            <View>
-              {isLoading ?
-                <ActivityIndicator
-                  color="#FF4D18"
-                  size='large'
-                /> : <View>
-                  <Text style={styles.textOrange}>
-                    {response.hourly.summary} {"\n"}{"\n"}
+          </Text>
+          <View>
+            {isLoading ?
+              <ActivityIndicator
+                color="#FF4D18"
+                size='large'
+              /> : <View>
+                <Text style={styles.textOrange}>
+                  {response.hourly.summary} {"\n"}{"\n"}
+                </Text>
+                <View>
+                  <Text style={styles.text}>Shirt: {
+                    (temp >= 15) ? 'Wear a T-shirt' :
+                      (temp <= 15) ? 'You need a long shirt or a sweater' :
+                        (temp <= 5) ? 'You need a thick sweater' :
+                          'Might not want to bother going outside'
+                  }</Text>
+                  <Text style={styles.text}>Jacket: {
+                    (temp >= 20) ? 'Leave your jackets at home!' :
+                      (temp >= 15) ? 'Bring a summer jacket' :
+                        (temp <= 8) ? 'Wear a winter jacket' :
+                          (temp <= 15) ? 'You need your jacket' :
+                            'Might not want to bother going outside'
+                  }</Text>
+                  <Text style={styles.text}>Jeans: {
+                    (temp <= 5) ? 'You need pretty warm pants' :
+                      (temp <= 20) ? 'Wear long jeans' :
+                        (temp >= 20) ? 'Wear shorts' :
+                          'Might not want to bother going outside'
+                  }</Text>
+                  <Text style={styles.text}>Shoes: {
+                    (temp <= 5) ? 'Wear some warm shoes' :
+                      (temp <= 15) ? 'Wear closed shoes' :
+                        (temp <= 20) ? 'Wear some breatheable sneakers' :
+                          (temp >= 20) ? 'You can wear open slippers or breatheeable sneakers' :
+                            'Might not want to bother going outside'
+                  }</Text>
+                  <Text style={styles.text}>Umbrella: {
+                    (response.daily.data[0].precipProbability >= 0.50) ? 'You should bring an umbrella' :
+                      "You won't need it"
+                  }
                   </Text>
-                  <View>
-                    <Text style={styles.text}>Shirt: {
-                      (temp >= 15) ? 'Wear a T-shirt' :
-                        (temp <= 15) ? 'You need a long shirt or a sweater' :
-                          (temp <= 5) ? 'You need a thick sweater' :
-                            'Might not want to bother going outside'
-                    }</Text>
-                    <Text style={styles.text}>Jacket: {
-                      (temp >= 20) ? 'Leave your jackets at home!' :
-                        (temp >= 15) ? 'Bring a summer jacket' :
-                          (temp <= 8) ? 'Wear a winter jacket' :
-                            (temp <= 15) ? 'You need your jacket' :
-                              'Might not want to bother going outside'
-                    }</Text>
-                    <Text style={styles.text}>Jeans: {
-                      (temp <= 5) ? 'You need pretty warm pants' :
-                        (temp <= 20) ? 'Wear long jeans' :
-                          (temp >= 20) ? 'Wear shorts' :
-                            'Might not want to bother going outside'
-                    }</Text>
-                    <Text style={styles.text}>Shoes: {
-                      (temp <= 5) ? 'Wear some warm shoes' :
-                        (temp <= 15) ? 'Wear closed shoes' :
-                          (temp <= 20) ? 'Wear some breatheable sneakers' :
-                            (temp >= 20) ? 'You can wear open slippers or breatheeable sneakers' :
-                              'Might not want to bother going outside'
-                    }</Text>
-                    <Text style={styles.text}>Umbrella: {
-                      (response.daily.data[0].precipProbability >= 0.50) ? 'You should bring an umbrella' :
-                        "You won't need it"
-                    }
-                    </Text>
-                  </View>
-                  <View style={styles.textData}>
-                    <Text>
-                      <Text style={styles.textLocation}>Temperature / Precipitate</Text>
-                    </Text>
-                    <Text>
-                    <Text style={styles.textData}>
-                        {Math.round(response.currently.temperature)}°C &nbsp;
-                      </Text>
-                      <Text style={styles.textData}>
-                        /&nbsp; {Math.round(response.daily.data[0].precipProbability * 100)}%
-                      </Text>
-                    </Text>
-                  </View>
                 </View>
-              }
-
-            </View>
-          </ScrollView>
-          <View style={styles.footer}>
+                <View style={styles.textData}>
+                  <Text>
+                    <Text style={styles.textLocation}>Temperature / Precipitate</Text>
+                  </Text>
+                  <Text>
+                    <Text style={styles.textData}>
+                      {Math.round(response.currently.temperature)}°C &nbsp;
+                      </Text>
+                    <Text style={styles.textData}>
+                      /&nbsp; {Math.round(response.daily.data[0].precipProbability * 100)}%
+                      </Text>
+                  </Text>
+                </View>
+              </View>
+            }
+          </View>
+          {/* <View style={styles.footer}>
             <Button
               color='#FF4D18'
               title="Refresh"
@@ -186,7 +193,8 @@ export default class AdviceScreen extends React.Component {
                 this.fetchForecast
               }>
             </Button>
-          </View>
+          </View> */}
+          </ScrollView>
         </ImageBackground>
       </View>
 
