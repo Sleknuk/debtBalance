@@ -122,6 +122,9 @@ export default class AdviceScreen extends React.Component {
               <RefreshControl
                 refreshing={this.state.refreshing}
                 onRefresh={this.fetchForecast}
+                tintColor="#FF4D18"
+                colors={['#FF4D18', '#37474f', '#FF4D18']}
+                progressBackgroundColor="#ffffff"
               />} >
           <Text style={styles.text}>
             On this page your advice on what clothes to wear is being shown. The advice is based on the weather forecast of the upcoming 24 hours:
@@ -129,10 +132,7 @@ export default class AdviceScreen extends React.Component {
           </Text>
           <View>
             {isLoading ?
-              <ActivityIndicator
-                color="#FF4D18"
-                size='large'
-              /> : <View>
+              <View></View> : <View>
                 <Text style={styles.textOrange}>
                   {response.hourly.summary} {"\n"}{"\n"}
                 </Text>

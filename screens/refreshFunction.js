@@ -2,7 +2,8 @@ import React from 'react';
 import {
     ScrollView,
     RefreshControl,
-    View
+    Text,
+    StyleSheet
 } from 'react-native';
 
 
@@ -34,12 +35,27 @@ export default class RefreshableList extends React.Component {
             <ScrollView
                 refreshControl={
                     <RefreshControl
-                        refreshing={this.state.refreshing}
+                        refreshing={true}
                         onRefresh={this._onRefresh}
+                        tintColor="#FF4D18"
+                colors={['#FF4D18', '#37474f']}
+                progressBackgroundColor="#ffffff"
                     />
                 }
-            />
+            >
+            <Text style={styles.text}>example pull to refresh</Text>
+            </ScrollView>
 
         );
     }
 }
+
+const styles = StyleSheet.create({
+text: {
+    paddingTop: '50%',
+    color: '#000000',
+    fontSize: 20,
+    lineHeight: 30,
+    textAlign: 'center',
+  },
+});
