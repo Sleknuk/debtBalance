@@ -73,7 +73,7 @@ export default class AdviceScreen extends React.Component {
     this._getLocationAsync().then(() => {
       const lat = this.state.location.coords.latitude;
       const lon = this.state.location.coords.longitude;
-      return fetch(`https://api.darksky.net/forecast/1d7929e1a57a9df90f4c5f039fd66fdc/${lat},${lon}?units=si`)
+      return fetch(`https://api.darksky.net/forecast/YOUR_API_KEY/${lat},${lon}?units=si`)
         .then(response => response.json())
         .then(results => this.setState({
           response: results,
@@ -83,7 +83,7 @@ export default class AdviceScreen extends React.Component {
           background: results.currently.precipType,
           refreshing: false,
         }, () => {
-          console.log(`https://api.darksky.net/forecast/1d7929e1a57a9df90f4c5f039fd66fdc/${lat},${lon}?units=si`);
+          console.log(`https://api.darksky.net/forecast/YOUR_API_KEY/${lat},${lon}?units=si`);
         }));
     });
   }
