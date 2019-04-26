@@ -4,7 +4,7 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from '../screens/HomeScreen';
-import AdviceScreen from '../screens/AdviceScreen';
+import InputScreen from '../screens/InputScreen';
 
 
 export default createMaterialBottomTabNavigator(
@@ -20,7 +20,8 @@ export default createMaterialBottomTabNavigator(
             }
         },
         Settings: {
-            screen: AdviceScreen,
+            screen: InputScreen
+        ,
             navigationOptions: {
                 tabBarLabel: 'Settings',
                 tabBarColor: '#ff3838',

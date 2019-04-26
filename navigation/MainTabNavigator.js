@@ -6,7 +6,7 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import TabBarIcon from '../components/TabBarIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screens/HomeScreen';
-import AdviceScreen from '../screens/AdviceScreen';
+import InputScreen from '../screens/InputScreen';
 import colors from '../constants/Colors';
 
 
@@ -36,12 +36,12 @@ HomeStack.navigationOptions = {
   )
 };
 
-const AdviceStack = createStackNavigator({
-  Advice: AdviceScreen,
+const InputStack = createStackNavigator({
+  Input: InputScreen,
 });
 
-AdviceStack.navigationOptions = {
-  tabBarLabel: 'Advice',
+InputStack.navigationOptions = {
+  tabBarLabel: 'Input',
   tabBarColor: '#ff3838',
   style: {
     backgroundColor: '#62727b',
@@ -54,7 +54,7 @@ AdviceStack.navigationOptions = {
 
 export default createMaterialTopTabNavigator({
   HomeStack,
-  AdviceStack,
+  InputStack,
 },
   {
     tabBarPosition: 'bottom',

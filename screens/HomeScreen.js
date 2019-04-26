@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -7,12 +7,13 @@ import {
   Button,
   Image
 } from 'react-native';
-import AdviceScreen from '../screens/AdviceScreen';
+import InputScreen from './InputScreen';
 import { createStackNavigator } from 'react-navigation';
+import UselessTextInputMultiline from "../screens/InputScreen"
 
 createStackNavigator(
   {
-    Advice: AdviceScreen,
+    Input: InputScreen,
   }
 );
 
@@ -21,7 +22,7 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     headerTitle: 'Clothes Advisor',
     headerStyle: {
-      textAlign : 'left',
+      textAlign: 'left',
       backgroundColor: '#37474f',
       height: 60,
       textAlign: 'left',
@@ -37,7 +38,7 @@ export default class HomeScreen extends React.Component {
   };
 
   navigatie() {
-    AdviceStack
+    InputStack
   }
 
   render() {
@@ -45,15 +46,15 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.mainContainer}>
           <View>
-            <Text style={styles.text}>The Clothes Advisor is an application that advices you which clothes to wear in the current weather. Imagine you want to go outside and wondering what to wear. One press on a button and the application gives an advice on what to wear. {"\n"}</Text>
-            <Text style={styles.textBold}>Try it out below!</Text>
+            <Text style={styles.text}> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem {"\n"}</Text>
+            <Text style={styles.textBold}>Text</Text>
           </View>
         </ScrollView>
         <View style={styles.footer}>
           <Button
             color='#FF4D18'
             title="Try it out"
-            onPress={() => this.props.navigation.navigate('Advice')}>
+            onPress={() => this.props.navigation.navigate('Input')}>
           </Button>
         </View>
       </View>
