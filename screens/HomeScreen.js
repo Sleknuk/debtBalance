@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import InputScreen from './InputScreen';
 import { createStackNavigator } from 'react-navigation';
-import UselessTextInputMultiline from "../screens/InputScreen"
+
+
+
 
 createStackNavigator(
   {
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f5f5f5',
   },
   mainContainer: {
     alignItems: 'center',

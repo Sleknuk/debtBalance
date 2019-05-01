@@ -5,60 +5,223 @@ import {
   View,
   Image,
   TextInput,
-  TouchableOpacity,
-  Vibration,
+  TouchableHighlight,
+  ScrollView,
+  Modal,
+  Alert,
 } from 'react-native';
+import { Button } from 'react-native-elements';
 
-class Input extends Component {
+const Income = (props) => (
+  <TextInput defaultValue={props.income} onChangeText={props.onTextChange} />
+);
 
-  constructor() {
-    super();
+const expence2 = (props) => (
+  <TextInput defaultValue={props.income2} onChangeText={props.onTextChange} />
+);
+
+const IncomeDisplay = (props) => (
+  <Text style={{ color: 'red' }}>{props.income}</Text>
+);
+
+const DARK_GRAY = "#D3D3D3";
+const LIGHT_GRAY = "#D3D3D3";
+
+export default class Input extends Component {
+
+  constructor(props) {
+    super(props);
+
     this.state = {
-      income: Number,
-      expences: Number
+      result: 0,
+      income: 0,
+      expences: 0,
+      expence2: 0,
+      expence3: 0,
+      expence4: 0,
+      expence5: 0,
+      isFocused: false,
+      modalVisible: false,
     }
   }
 
-  updateValue(text, field) {
-    if (field == 'income') {
+  handleFocus = event => {
+    this.setState({ isFocused: true });
+    if (this.props.onFocus) {
+      this.props.onFocus(event);
       this.setState({
-        income: text,
+        isFocused: false,
       })
+    }
+  };
+
+
+  updateValue(numeric, field) {
+    if (field == 'income') {
+      this.setState({ income: Number.parseFloat(numeric) });
     }
     else if (field == 'expences') {
-      this.setState({
-        expences: text,
-      })
+      this.setState({ expences: Number.parseFloat(numeric) });
     }
+    else if (field == 'expence2') {
+      this.setState({ expence2: Number.parseFloat(numeric) });
+    }
+    else if (field == 'expence3') {
+      this.setState({ expence3: Number.parseFloat(numeric) });
+    }
+    else if (field == 'expence4') {
+      this.setState({ expence4: Number.parseFloat(numeric) });
+    }
+    else if (field == 'expence5') {
+      this.setState({ expence5: Number.parseFloat(numeric) });
+    }
+
   }
 
-  submitFunction() {
-    let collection={}
-    collection.income=this.state.income,
-    collection.expences=this.state.expences
-    console.warn(collection);
+  addAction = (event) => {
+    let x = this.state.expence5 + this.state.expence4;
+    this.setState({ result: x })
+    console.log(x);
   }
+
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
+
 
   render() {
+    const { isFocused } = this.state;
+    const { onFocus, onBlur, ...otherProps } = this.props;
+    console.log(12 + 3)
     return (
       <View style={styles.container}>
         <TextInput
+          selectionColor={DARK_GRAY}
+          underlineColorAndroid={
+            isFocused ? DARK_GRAY : LIGHT_GRAY
+          }
+          onFocus={this.handleFocus}
           placeholder='income'
+          keyboardType={"numeric"}
+          maxLength={8}
           style={styles.input}
-          onChangeText={(text) => this.updateValue(text, 'income')}
+          onChangeText={(numeric) => this.updateValue(numeric, 'income')}
         />
         <TextInput
+          selectionColor={DARK_GRAY}
+          underlineColorAndroid={
+            isFocused ? DARK_GRAY : LIGHT_GRAY
+          }
+          onFocus={this.handleFocus}
           placeholder='expences'
+          keyboardType={"numeric"}
+          maxLength={8}
           style={styles.input}
-          onChangeText={(text) => this.updateValue(text, 'expences')}
+          onChangeText={(numeric) => this.updateValue(numeric, 'expences')}
+        />
+        <TextInput
+          selectionColor={DARK_GRAY}
+          underlineColorAndroid={
+            isFocused ? DARK_GRAY : LIGHT_GRAY
+          }
+          onFocus={this.handleFocus}
+          placeholder='expence2'
+          keyboardType={"numeric"}
+          maxLength={8}
+          style={styles.input}
+          onChangeText={(numeric) => this.updateValue(numeric, 'expence2')}
+        />
+        <TextInput
+          selectionColor={DARK_GRAY}
+          underlineColorAndroid={
+            isFocused ? DARK_GRAY : LIGHT_GRAY
+          }
+          onFocus={this.handleFocus}
+          placeholder='expence3'
+          keyboardType={"numeric"}
+          maxLength={8}
+          style={styles.input}
+          onChangeText={(numeric) => this.updateValue(numeric, 'expence3')}
+        />
+        <TextInput
+          selectionColor={DARK_GRAY}
+          underlineColorAndroid={
+            isFocused ? DARK_GRAY : LIGHT_GRAY
+          }
+          onFocus={this.handleFocus}
+          placeholder='expence4'
+          keyboardType={"numeric"}
+          maxLength={8}
+          style={styles.input}
+          onChangeText={(numeric) => this.updateValue(numeric, 'expence4')}
+        />
+        <TextInput
+          selectionColor={DARK_GRAY}
+          underlineColorAndroid={
+            isFocused ? DARK_GRAY : LIGHT_GRAY
+          }
+          onFocus={this.handleFocus}
+          placeholder='expence5'
+          keyboardType={"numeric"}
+          maxLength={8}
+          style={styles.input}
+          onChangeText={(numeric) => this.updateValue(numeric, 'expence5')}
         />
 
-        <TouchableOpacity
-          onPress={() => this.submitFunction()}
-          style={styles.button}>
-          <Text>Submit</Text>
-        </TouchableOpacity>
-      </View>
+        <Modal
+          animationType="fade"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}>
+          <View style={{ marginTop: 22 }}>
+            <View>
+              <View style={styles.space}>
+                <Text>Total income: </Text>
+                <Text>{this.state.income}</Text>
+              </View>
+              <View style={styles.space}>
+                <Text>Total expences: </Text>
+                <Text>{(
+                  this.state.expences +
+                  this.state.expence2 +
+                  this.state.expence3 +
+                  this.state.expence4 +
+                  this.state.expence5)}
+                </Text>
+              </View>
+              <View style={styles.line}></View>
+              <View style={styles.space}>
+              <Text>Money to spend per month: </Text>
+              <Text>{(
+                this.state.income) - (
+                  this.state.expences +
+                  this.state.expence2 +
+                  this.state.expence3 +
+                  this.state.expence4 +
+                  this.state.expence5)}
+              </Text>
+              </View>
+            </View>
+            <TouchableHighlight
+              style={styles.button}
+              onPress={() => {
+                this.setModalVisible(!this.state.modalVisible);
+              }}>
+              <Text>Hide Modal</Text>
+            </TouchableHighlight>
+          </View>
+        </Modal >
+      <Button
+        color='#FF4D18'
+        title="Try it out"
+        onPress={() => {
+          this.setModalVisible(true);
+        }}>>
+
+        </Button>
+      </View >
     );
   }
 }
@@ -67,38 +230,75 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F5F5F5',
     flex: 1,
-    justifyContent: 'center',
-    paddingLeft: '10%',
-    paddingRight: '10%',
+    justifyContent: 'flex-start',
+    paddingTop: '2%',
+    paddingLeft: '5%',
+    paddingRight: '5%',
 
   },
-  input: {
-    borderRadius: 4,
-    borderWidth: 0.8,
-    borderColor: '#d6d7da',
+
+  line: {
+    height: 2,
+    borderRadius: 2,
+    width: '100%',
+    backgroundColor: '#000000',
   },
+
+  space: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+
+  containerBlue: {
+    backgroundColor: 'blue',
+    paddingTop: '2%',
+    paddingLeft: '5%',
+    paddingRight: '5%',
+
+  },
+
   button: {
-    backgroundColor: 'skyblue',
-    height: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-}
-);
+    width: '100%',
+    height: 40,
+    borderRadius: 2,
+    backgroundColor: 'red',
+  },
 
-export default Input
-
-
-
-
-
-
-
+  input: {
+    width: '100%',
+    height: 50,
+    borderRadius: 4,
+    backgroundColor: 'rgba(255,255,255,0.3)',
+    paddingLeft: 6,
+  },
+});
 
 
 
 
 
+
+  // submitFunction() {
+  //   let collection = {}
+  //   collection.income = this.state.income,
+  //     collection.expences = this.state.expences
+  //   console.warn(collection.income - collection.expences);
+  // }
+
+
+
+
+
+// <TouchableOpacity
+// onPress={() => this.submitFunction()}
+// style={styles.button}>
+// <Text>Submit</Text>
+// </TouchableOpacity>
+
+// <View>
+// <IncomeDisplay income={this.state.income} />
+// <Income income={this.state.income} onTextChange={income => this.setState({ income })} />
+// </View>
 
 
 
@@ -229,7 +429,7 @@ export default Input
 //     fontSize: 20,
 //     lineHeight: 30,
 //   },
-//   textOrange: {
+//   textDARK_GRAY: {
 //     color: '#661700',
 //     fontSize: 20,
 //     textAlign: 'center',
@@ -248,8 +448,8 @@ export default Input
 //   footer: {
 //     paddingTop: 5,
 //     paddingBottom: 5,
-//     paddingLeft: 10,
-//     paddingRight: 10,
+//     paddingLeft: 5,
+//     paddingRight: 5,
 //   },
 
 // });
