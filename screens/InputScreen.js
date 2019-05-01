@@ -1,4 +1,4 @@
-// KLEUREN ENDAVA: de411b en 64666d
+// COLORS ENDAVA: de411b AND 64666d
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -11,6 +11,8 @@ import {
   Modal,
   Button,
 } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native';
+
 
 
 const DARK_GRAY = "#D3D3D3";
@@ -28,9 +30,9 @@ export default class Input extends Component {
     headerTitleStyle: {
       fontWeight: 'bold',
       flex: 1,
-    }, 
+    },
     headerLeft:
-    (<View style={{ paddingLeft: 15 }}><Image style={{ width: 45, height: 45, flex: 1 }} resizeMode="contain" source={require('../assets/images/icon.png')} /></View>)
+      (<View style={{ paddingLeft: 15 }}><Image style={{ width: 45, height: 45, flex: 1 }} resizeMode="contain" source={require('../assets/images/icon.png')} /></View>)
   };
 
   constructor(props) {
@@ -44,6 +46,7 @@ export default class Input extends Component {
       expence3: 0,
       expence4: 0,
       expence5: 0,
+      other: 0,
       isFocused: false,
       modalVisible: false,
     }
@@ -79,12 +82,10 @@ export default class Input extends Component {
     else if (field == 'expence5') {
       this.setState({ expence5: Number.parseFloat(numeric) });
     }
+    else if (field == 'other') {
+      this.setState({ other: Number.parseFloat(numeric) });
+    }
 
-  }
-
-  addAction = (event) => {
-    let x = this.state.expence5 + this.state.expence4;
-    this.setState({ result: x })
   }
 
   setModalVisible(visible) {
@@ -96,9 +97,13 @@ export default class Input extends Component {
     const { isFocused } = this.state;
     const { onFocus, onBlur, ...otherProps } = this.props;
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior="padding" enabled
+        keyboardVerticalOffset='85'>
         <ScrollView contentContainerStyle={styles.mainContainer}>
-          <View style={{backgroundColor: '#f0f0f0'}}>
+          <View style={{ backgroundColor: '#f0f0f0' }}>
+            <Text style={styles.text}>Start by filling your data in below and press 'Show Results' whenever you are ready:</Text>
             <TextInput
               selectionColor={DARK_GRAY}
               underlineColorAndroid={
@@ -117,7 +122,7 @@ export default class Input extends Component {
                 isFocused ? DARK_GRAY : LIGHT_GRAY
               }
               onFocus={this.handleFocus}
-              placeholder='Total Insurrance (Car, House etc.)'
+              placeholder='Total insurance (Car, House, Health…)'
               keyboardType={"numeric"}
               maxLength={8}
               style={styles.input}
@@ -171,7 +176,20 @@ export default class Input extends Component {
               style={styles.input}
               onChangeText={(numeric) => this.updateValue(numeric, 'expence5')}
             />
+            <TextInput
+              selectionColor={DARK_GRAY}
+              underlineColorAndroid={
+                isFocused ? DARK_GRAY : LIGHT_GRAY
+              }
+              onFocus={this.handleFocus}
+              placeholder='Other expense(s)'
+              keyboardType={"numeric"}
+              maxLength={8}
+              style={styles.input}
+              onChangeText={(numeric) => this.updateValue(numeric, 'other')}
+            />
           </View>
+          <View style={{ height: 60, }}></View>
 
           <Modal
             animationType="fade"
@@ -196,34 +214,36 @@ export default class Input extends Component {
                 height: '50%',
                 borderRadius: 8,
               }}>
-              <ScrollView>
-                <View style={styles.space}>
-                  <Text>Total income: </Text>
-                  <Text>{this.state.income}</Text>
-                </View>
-                <View style={styles.space}>
-                  <Text>Total expences: </Text>
-                  <Text>{(
-                    this.state.expences +
-                    this.state.expence2 +
-                    this.state.expence3 +
-                    this.state.expence4 +
-                    this.state.expence5)}
-                  </Text>
-                </View>
-                <View style={styles.line}></View>
-                <View style={styles.space}>
-                  <Text style={{fontWeight: 'bold'}}>Money to invest: </Text>
-                  <Text style={{fontWeight: 'bold'}}>{(
-                    this.state.income) - (
+                <ScrollView>
+                  <View style={styles.space}>
+                    <Text>Total income: </Text>
+                    <Text>{this.state.income}</Text>
+                  </View>
+                  <View style={styles.space}>
+                    <Text>Total expences: </Text>
+                    <Text>{(
                       this.state.expences +
                       this.state.expence2 +
                       this.state.expence3 +
                       this.state.expence4 +
-                      this.state.expence5)
-                    + "\n" + "\n"}
-                  </Text>
-                </View>
+                      this.state.expence5 +
+                      this.state.other)}
+                    </Text>
+                  </View>
+                  <View style={styles.line}></View>
+                  <View style={styles.space}>
+                    <Text style={{ fontWeight: 'bold' }}>Money to invest: </Text>
+                    <Text style={{ fontWeight: 'bold' }}>{(
+                      this.state.income) - (
+                        this.state.expences +
+                        this.state.expence2 +
+                        this.state.expence3 +
+                        this.state.expence4 +
+                        this.state.expence5 +
+                        this.state.other)
+                      + "\n" + "\n"}
+                    </Text>
+                  </View>
                 </ScrollView>
                 <View>
                   <TouchableHighlight
@@ -231,7 +251,7 @@ export default class Input extends Component {
                     onPress={() => {
                       this.setModalVisible(!this.state.modalVisible);
                     }}>
-                    <Text style={{fontWeight: 'bold', color: '#FFFFFF'}}> CLOSE </Text>
+                    <Text style={{ fontWeight: 'bold', color: '#FFFFFF' }}> CLOSE </Text>
                   </TouchableHighlight>
                 </View>
               </View>
@@ -247,7 +267,7 @@ export default class Input extends Component {
             }}>>
         </Button>
         </View>
-      </View >
+      </KeyboardAvoidingView>
 
     );
   }
@@ -257,7 +277,13 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 15,
     backgroundColor: '#f5f5f5',
+  },
 
+  text: {
+    color: '#000000',
+    fontSize: 18,
+    lineHeight: 30,
+    backgroundColor: '#f5f5f5',
   },
 
   mainContainer: {

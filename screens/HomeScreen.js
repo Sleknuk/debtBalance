@@ -48,8 +48,8 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.mainContainer}>
           <View>
-            <Text style={styles.text}> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem {"\n"}</Text>
-            <Text style={styles.textBold}>Text</Text>
+          <Text style={styles.textBold}>Welcome! {"\n"}</Text>
+            <Text style={styles.text}> The goal of Endava is to give you, the user, insight in your expenses. We believe that you don’t learn much by just filling in numbers but really thinking about what you spend your money on.{"\n"}{"\n"}So start thinking in solutions and start saving money today! </Text>
           </View>
         </ScrollView>
         <View style={styles.footer}>
@@ -76,13 +76,15 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#000000',
-    fontSize: 20,
+    fontSize: 18,
     lineHeight: 30,
   },
   textBold: {
     paddingTop: 15,
     color: '#000000',
-    fontSize: 24,
+    fontSize: 28,
+    justifyContent: 'center',
+    fontWeight: 'bold',
   },
   footer: {
     borderRadius: 8,
