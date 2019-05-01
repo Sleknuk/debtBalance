@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Clothes Advisor",
+    "name": "Debt Balance",
     "slug": "clothes-advisor",
     "privacy": "public",
     "sdkVersion": "31.0.0",
@@ -27,7 +27,7 @@
     "android": {
       "package": "nl.maxkunkels.clothesAdvisor"
     },
-    "description": "The Clothes Advisor is an application that Inputs you which clothes to wear in the current weather. Imagine you want to go outside and wondering what to wear. One press on a button and the application gives an Input on what to wear. ",
+    "description": "The Debt Balance is an application that Inputs you which clothes to wear in the current weather. Imagine you want to go outside and wondering what to wear. One press on a button and the application gives an Input on what to wear. ",
     "githubUrl": "https://github.com/Sleknuk/Clothes-Advisor"
   }
 }

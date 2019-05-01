@@ -59,8 +59,8 @@ export default createMaterialTopTabNavigator({
   {
     tabBarPosition: 'bottom',
     tabBarOptions: {
-      activeTintColor: '#FF4D18',
-      inactiveTintColor: 'grey',
+      activeTintColor: '#de411b',
+      inactiveTintColor: '#64666d',
       labelStyles:{ fontSize: 15 },
       style: {
         backgroundColor: '#ffffff',
@@ -68,7 +68,7 @@ export default createMaterialTopTabNavigator({
       },
       indicatorStyle: {
         height: 2,
-        backgroundColor: '#FF4D18',
+        backgroundColor: '#de411b',
       },
       allowFontScaling: false,
       showIcon: true,

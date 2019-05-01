@@ -1,3 +1,4 @@
+// KLEUREN ENDAVA: de411b en 64666d
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -8,26 +9,29 @@ import {
   TouchableHighlight,
   ScrollView,
   Modal,
-  Alert,
+  Button,
 } from 'react-native';
-import { Button } from 'react-native-elements';
 
-const Income = (props) => (
-  <TextInput defaultValue={props.income} onChangeText={props.onTextChange} />
-);
-
-const expence2 = (props) => (
-  <TextInput defaultValue={props.income2} onChangeText={props.onTextChange} />
-);
-
-const IncomeDisplay = (props) => (
-  <Text style={{ color: 'red' }}>{props.income}</Text>
-);
 
 const DARK_GRAY = "#D3D3D3";
 const LIGHT_GRAY = "#D3D3D3";
 
 export default class Input extends Component {
+  static navigationOptions = {
+    title: 'Input Screen',
+    headerStyle: {
+      backgroundColor: '#a40000',
+      height: 60,
+    },
+    headerTintColor: 'white',
+    justifyAllignment: 'center',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      flex: 1,
+    }, 
+    headerLeft:
+    (<View style={{ paddingLeft: 15 }}><Image style={{ width: 45, height: 45, flex: 1 }} resizeMode="contain" source={require('../assets/images/icon.png')} /></View>)
+  };
 
   constructor(props) {
     super(props);
@@ -81,7 +85,6 @@ export default class Input extends Component {
   addAction = (event) => {
     let x = this.state.expence5 + this.state.expence4;
     this.setState({ result: x })
-    console.log(x);
   }
 
   setModalVisible(visible) {
@@ -92,149 +95,173 @@ export default class Input extends Component {
   render() {
     const { isFocused } = this.state;
     const { onFocus, onBlur, ...otherProps } = this.props;
-    console.log(12 + 3)
     return (
       <View style={styles.container}>
-        <TextInput
-          selectionColor={DARK_GRAY}
-          underlineColorAndroid={
-            isFocused ? DARK_GRAY : LIGHT_GRAY
-          }
-          onFocus={this.handleFocus}
-          placeholder='income'
-          keyboardType={"numeric"}
-          maxLength={8}
-          style={styles.input}
-          onChangeText={(numeric) => this.updateValue(numeric, 'income')}
-        />
-        <TextInput
-          selectionColor={DARK_GRAY}
-          underlineColorAndroid={
-            isFocused ? DARK_GRAY : LIGHT_GRAY
-          }
-          onFocus={this.handleFocus}
-          placeholder='expences'
-          keyboardType={"numeric"}
-          maxLength={8}
-          style={styles.input}
-          onChangeText={(numeric) => this.updateValue(numeric, 'expences')}
-        />
-        <TextInput
-          selectionColor={DARK_GRAY}
-          underlineColorAndroid={
-            isFocused ? DARK_GRAY : LIGHT_GRAY
-          }
-          onFocus={this.handleFocus}
-          placeholder='expence2'
-          keyboardType={"numeric"}
-          maxLength={8}
-          style={styles.input}
-          onChangeText={(numeric) => this.updateValue(numeric, 'expence2')}
-        />
-        <TextInput
-          selectionColor={DARK_GRAY}
-          underlineColorAndroid={
-            isFocused ? DARK_GRAY : LIGHT_GRAY
-          }
-          onFocus={this.handleFocus}
-          placeholder='expence3'
-          keyboardType={"numeric"}
-          maxLength={8}
-          style={styles.input}
-          onChangeText={(numeric) => this.updateValue(numeric, 'expence3')}
-        />
-        <TextInput
-          selectionColor={DARK_GRAY}
-          underlineColorAndroid={
-            isFocused ? DARK_GRAY : LIGHT_GRAY
-          }
-          onFocus={this.handleFocus}
-          placeholder='expence4'
-          keyboardType={"numeric"}
-          maxLength={8}
-          style={styles.input}
-          onChangeText={(numeric) => this.updateValue(numeric, 'expence4')}
-        />
-        <TextInput
-          selectionColor={DARK_GRAY}
-          underlineColorAndroid={
-            isFocused ? DARK_GRAY : LIGHT_GRAY
-          }
-          onFocus={this.handleFocus}
-          placeholder='expence5'
-          keyboardType={"numeric"}
-          maxLength={8}
-          style={styles.input}
-          onChangeText={(numeric) => this.updateValue(numeric, 'expence5')}
-        />
+        <ScrollView contentContainerStyle={styles.mainContainer}>
+          <View style={{backgroundColor: '#f0f0f0'}}>
+            <TextInput
+              selectionColor={DARK_GRAY}
+              underlineColorAndroid={
+                isFocused ? DARK_GRAY : LIGHT_GRAY
+              }
+              onFocus={this.handleFocus}
+              placeholder='Total Income'
+              keyboardType={"numeric"}
+              maxLength={8}
+              style={styles.input}
+              onChangeText={(numeric) => this.updateValue(numeric, 'income')}
+            />
+            <TextInput
+              selectionColor={DARK_GRAY}
+              underlineColorAndroid={
+                isFocused ? DARK_GRAY : LIGHT_GRAY
+              }
+              onFocus={this.handleFocus}
+              placeholder='Total Insurrance (Car, House etc.)'
+              keyboardType={"numeric"}
+              maxLength={8}
+              style={styles.input}
+              onChangeText={(numeric) => this.updateValue(numeric, 'expences')}
+            />
+            <TextInput
+              selectionColor={DARK_GRAY}
+              underlineColorAndroid={
+                isFocused ? DARK_GRAY : LIGHT_GRAY
+              }
+              onFocus={this.handleFocus}
+              placeholder='Car costs'
+              keyboardType={"numeric"}
+              maxLength={8}
+              style={styles.input}
+              onChangeText={(numeric) => this.updateValue(numeric, 'expence2')}
+            />
+            <TextInput
+              selectionColor={DARK_GRAY}
+              underlineColorAndroid={
+                isFocused ? DARK_GRAY : LIGHT_GRAY
+              }
+              onFocus={this.handleFocus}
+              placeholder='Rent'
+              keyboardType={"numeric"}
+              maxLength={8}
+              style={styles.input}
+              onChangeText={(numeric) => this.updateValue(numeric, 'expence3')}
+            />
+            <TextInput
+              selectionColor={DARK_GRAY}
+              underlineColorAndroid={
+                isFocused ? DARK_GRAY : LIGHT_GRAY
+              }
+              onFocus={this.handleFocus}
+              placeholder='Food'
+              keyboardType={"numeric"}
+              maxLength={8}
+              style={styles.input}
+              onChangeText={(numeric) => this.updateValue(numeric, 'expence4')}
+            />
+            <TextInput
+              selectionColor={DARK_GRAY}
+              underlineColorAndroid={
+                isFocused ? DARK_GRAY : LIGHT_GRAY
+              }
+              onFocus={this.handleFocus}
+              placeholder='Debt payment(s)'
+              keyboardType={"numeric"}
+              maxLength={8}
+              style={styles.input}
+              onChangeText={(numeric) => this.updateValue(numeric, 'expence5')}
+            />
+          </View>
 
-        <Modal
-          animationType="fade"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
-          <View style={{ marginTop: 22 }}>
-            <View>
-              <View style={styles.space}>
-                <Text>Total income: </Text>
-                <Text>{this.state.income}</Text>
-              </View>
-              <View style={styles.space}>
-                <Text>Total expences: </Text>
-                <Text>{(
-                  this.state.expences +
-                  this.state.expence2 +
-                  this.state.expence3 +
-                  this.state.expence4 +
-                  this.state.expence5)}
-                </Text>
-              </View>
-              <View style={styles.line}></View>
-              <View style={styles.space}>
-              <Text>Money to spend per month: </Text>
-              <Text>{(
-                this.state.income) - (
-                  this.state.expences +
-                  this.state.expence2 +
-                  this.state.expence3 +
-                  this.state.expence4 +
-                  this.state.expence5)}
-              </Text>
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {
+              this.setState({
+                modalVisible: false,
+              })
+            }}>
+            <View style={{
+              backgroundColor: '#00000080',
+              flex: 1,
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+              <View style={{
+                backgroundColor: '#fff',
+                padding: 20,
+                width: '70%',
+                height: '50%',
+                borderRadius: 8,
+              }}>
+              <ScrollView>
+                <View style={styles.space}>
+                  <Text>Total income: </Text>
+                  <Text>{this.state.income}</Text>
+                </View>
+                <View style={styles.space}>
+                  <Text>Total expences: </Text>
+                  <Text>{(
+                    this.state.expences +
+                    this.state.expence2 +
+                    this.state.expence3 +
+                    this.state.expence4 +
+                    this.state.expence5)}
+                  </Text>
+                </View>
+                <View style={styles.line}></View>
+                <View style={styles.space}>
+                  <Text style={{fontWeight: 'bold'}}>Money to invest: </Text>
+                  <Text style={{fontWeight: 'bold'}}>{(
+                    this.state.income) - (
+                      this.state.expences +
+                      this.state.expence2 +
+                      this.state.expence3 +
+                      this.state.expence4 +
+                      this.state.expence5)
+                    + "\n" + "\n"}
+                  </Text>
+                </View>
+                </ScrollView>
+                <View>
+                  <TouchableHighlight
+                    style={styles.closeButton}
+                    onPress={() => {
+                      this.setModalVisible(!this.state.modalVisible);
+                    }}>
+                    <Text style={{fontWeight: 'bold', color: '#FFFFFF'}}> CLOSE </Text>
+                  </TouchableHighlight>
+                </View>
               </View>
             </View>
-            <TouchableHighlight
-              style={styles.button}
-              onPress={() => {
-                this.setModalVisible(!this.state.modalVisible);
-              }}>
-              <Text>Hide Modal</Text>
-            </TouchableHighlight>
-          </View>
-        </Modal >
-      <Button
-        color='#FF4D18'
-        title="Try it out"
-        onPress={() => {
-          this.setModalVisible(true);
-        }}>>
-
+          </Modal >
+        </ScrollView>
+        <View style={styles.footer}>
+          <Button
+            color='#ff7448'
+            title="Show Results"
+            onPress={() => {
+              this.setModalVisible(true);
+            }}>>
         </Button>
+        </View>
       </View >
+
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F5F5F5',
     flex: 1,
-    justifyContent: 'flex-start',
-    paddingTop: '2%',
-    paddingLeft: '5%',
-    paddingRight: '5%',
+    paddingTop: 15,
+    backgroundColor: '#f5f5f5',
 
+  },
+
+  mainContainer: {
+    margin: '5%',
   },
 
   line: {
@@ -242,6 +269,7 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     width: '100%',
     backgroundColor: '#000000',
+    marginBottom: 10,
   },
 
   space: {
@@ -254,202 +282,30 @@ const styles = StyleSheet.create({
     paddingTop: '2%',
     paddingLeft: '5%',
     paddingRight: '5%',
-
-  },
-
-  button: {
-    width: '100%',
-    height: 40,
-    borderRadius: 2,
-    backgroundColor: 'red',
   },
 
   input: {
-    width: '100%',
     height: 50,
     borderRadius: 4,
     backgroundColor: 'rgba(255,255,255,0.3)',
-    paddingLeft: 6,
+    paddingLeft: 10,
+  },
+
+  closeButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'skyblue',
+    padding: 20,
+    height: 50,
+    borderRadius: 4,
+    backgroundColor: '#ff7448',
+  },
+
+  footer: {
+    borderRadius: 8,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
 });
-
-
-
-
-
-
-  // submitFunction() {
-  //   let collection = {}
-  //   collection.income = this.state.income,
-  //     collection.expences = this.state.expences
-  //   console.warn(collection.income - collection.expences);
-  // }
-
-
-
-
-
-// <TouchableOpacity
-// onPress={() => this.submitFunction()}
-// style={styles.button}>
-// <Text>Submit</Text>
-// </TouchableOpacity>
-
-// <View>
-// <IncomeDisplay income={this.state.income} />
-// <Income income={this.state.income} onTextChange={income => this.setState({ income })} />
-// </View>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { Component } from 'react';
-// import {
-//   ScrollView,
-//   StyleSheet,
-//   Text,
-//   View,
-//   Button,
-//   ImageBackground,
-//   Image,
-//   ActivityIndicator,
-//   RefreshControl,
-//   AppRegistry,
-//   TextInput
-
-
-// } from 'react-native';
-
-// class UselessTextInput extends Component {
-//   render() {
-//     return (
-//       <TextInput
-//         {...this.props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
-//         editable={true}
-//         keyboardType={"numeric"}
-//         maxLength={8}
-//       />
-//     );
-//   }
-// }
-
-
-// export default class InputScreen extends React.Component {
-//   static navigationOptions = {
-//     title: 'Input Screen',
-//     headerStyle: {
-//       backgroundColor: '#37474f',
-//       height: 60,
-//     },
-//     headerTintColor: 'white',
-//     justifyAllignment: 'center',
-//     headerTitleStyle: {
-//       fontWeight: 'bold',
-//       flex: 1,
-//     },
-//     headerLeft:
-//       (<View style={{ paddingLeft: 15 }}><Image style={{ width: 45, height: 45, flex: 1 }} resizeMode="contain" source={require('../assets/images/icon.png')} /></View>)
-//   };
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       text: '',
-//     };
-//   }
-
-//   render() {
-
-//     return (
-//       <View>
-
-//         <View style={{
-//           backgroundColor: this.state.text,
-//           borderBottomColor: '#000000',
-//           borderBottomWidth: 1
-//         }}
-//         >
-//           <UselessTextInput
-//             multiline={true}
-//             numberOfLines={4}
-//             placeholder="Type here to translate!"
-//             onChangeText={(text) => this.setState({ text })}
-//             value={this.state.text}
-//           />
-//         </View>
-//         <Text>{this.state.text}</Text>
-//       </View>
-//     );
-//   }
-// }
-
-// // skip these lines if using Create React Native App
-// AppRegistry.registerComponent(
-//   'AwesomeProject',
-//   () => UselessTextInputMultiline
-// );
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#ffffff',
-//   },
-//   mainContainer: {
-//     paddingTop: 15,
-//     alignItems: 'center',
-//     margin: '5%',
-//   },
-//   text: {
-//     color: '#000000',
-//     fontSize: 20,
-//     lineHeight: 30,
-//   },
-//   textDARK_GRAY: {
-//     color: '#661700',
-//     fontSize: 20,
-//     textAlign: 'center',
-//   },
-//   textLocation: {
-//     color: '#661700',
-//     fontSize: 20,
-//     textAlign: 'center',
-//   },
-//   textData: {
-//     color: '#000000',
-//     fontSize: 20,
-//     alignItems: 'center',
-//     margin: '5%',
-//   },
-//   footer: {
-//     paddingTop: 5,
-//     paddingBottom: 5,
-//     paddingLeft: 5,
-//     paddingRight: 5,
-//   },
-
-// });

@@ -37,8 +37,8 @@ export default class RefreshableList extends React.Component {
                     <RefreshControl
                         refreshing={true}
                         onRefresh={this._onRefresh}
-                        tintColor="#FF4D18"
-                colors={['#FF4D18', '#37474f']}
+                        tintColor="#de411b"
+                colors={['#de411b', '#64666d']}
                 progressBackgroundColor="#ffffff"
                     />
                 }

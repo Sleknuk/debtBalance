@@ -22,10 +22,10 @@ createStackNavigator(
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    headerTitle: 'Clothes Advisor',
+    headerTitle: 'Debt Balance',
     headerStyle: {
       textAlign: 'left',
-      backgroundColor: '#37474f',
+      backgroundColor: '#a40000',
       height: 60,
       textAlign: 'left',
     },
@@ -54,7 +54,7 @@ export default class HomeScreen extends React.Component {
         </ScrollView>
         <View style={styles.footer}>
           <Button
-            color='#FF4D18'
+            color='#ff7448'
             title="Try it out"
             onPress={() => this.props.navigation.navigate('Input')}>
           </Button>
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   footer: {
-    borderRadius: 2,
+    borderRadius: 8,
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 10,
