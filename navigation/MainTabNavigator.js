@@ -10,16 +10,6 @@ import InputScreen from '../screens/InputScreen';
 import colors from '../constants/Colors';
 
 
-// export default class App extends Component {
-//   render(){
-//     return(
-
-//     )
-//   }
-// }
-
-
-
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
 });
@@ -48,7 +38,7 @@ InputStack.navigationOptions = {
     fontWeight: 'bold',
   },
   tabBarIcon: ({ tintColor, focused }) => (
-    <Icon size={25} name={Platform.OS === 'ios' ? (focused ? 'ios-umbrella' : 'ios-umbrella') : 'md-umbrella'} style={{ color: tintColor }} />
+    <Icon size={25} name={Platform.OS === 'ios' ? (focused ? 'ios-trending-up' : 'ios-trending-up-outline') : 'md-trending-up'} style={{ color: tintColor }} />
   )
 };
 
