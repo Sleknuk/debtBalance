@@ -48,10 +48,14 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.mainContainer}>
           <View>
-          <Text style={styles.textBold}>Welcome! {"\n"}</Text>
-            <Text style={styles.text}> The goal of Endava is to give you, the user, insight in your expenses. We believe that you don’t learn much by just filling in numbers but really thinking about what you spend your money on.{"\n"}{"\n"}So start thinking in solutions and start saving money today! </Text>
+            <Text style={styles.textBold}>Welcome! {"\n"}</Text>
+            <Text style={styles.text}>The goal of Endava is to give you, the user, insight in your expenses. We believe that you don’t learn much by just filling in numbers but really thinking about what you spend your money on.{"\n"}{"\n"}So start thinking in solutions and start saving money today! </Text>
           </View>
         </ScrollView>
+        <Text style={styles.disclaimer}>
+          <Text style={{ fontWeight: 'bold' }}>Disclaimer: </Text>
+          <Text>Debt Balance is not an guaranteed solution for financial independence</Text>
+        </Text>
         <View style={styles.footer}>
           <Button
             color='#ff7448'
@@ -67,23 +71,28 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
     backgroundColor: '#f5f5f5',
   },
   mainContainer: {
     alignItems: 'center',
     margin: '5%',
   },
+
+  disclaimer: {
+    fontSize: 11,
+    margin: '5%',
+    color: '#00000090'
+  },
+
   text: {
     color: '#000000',
     fontSize: 18,
     lineHeight: 30,
   },
   textBold: {
-    paddingTop: 15,
     color: '#000000',
     fontSize: 28,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     fontWeight: 'bold',
   },
   footer: {

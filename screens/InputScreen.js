@@ -103,7 +103,7 @@ export default class Input extends Component {
         keyboardVerticalOffset='85'>
         <ScrollView contentContainerStyle={styles.mainContainer}>
           <View style={{ backgroundColor: '#f0f0f0' }}>
-            <Text style={styles.text}>Start by filling your data in below and press 'Show Results' whenever you are ready:</Text>
+            <Text style={styles.text}>Start by filling your income/expenses per month below and press 'Show Results' whenever you are ready:</Text>
             <TextInput
               selectionColor={DARK_GRAY}
               underlineColorAndroid={
@@ -275,7 +275,6 @@ export default class Input extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
     backgroundColor: '#f5f5f5',
   },
 

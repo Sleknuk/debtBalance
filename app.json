@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Debt Balance",
-    "slug": "clothes-advisor",
+    "slug": "debt-balance",
     "privacy": "public",
     "sdkVersion": "31.0.0",
     "platforms": [
@@ -25,9 +25,9 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "nl.maxkunkels.clothesAdvisor"
+      "package": "nl.maxkunkels.debtBalance"
     },
-    "description": "The Debt Balance is an application that Inputs you which clothes to wear in the current weather. Imagine you want to go outside and wondering what to wear. One press on a button and the application gives an Input on what to wear. ",
-    "githubUrl": "https://github.com/Sleknuk/Clothes-Advisor"
+    "description": "The goal of the app is to give an user insight in his/her expenses. We believe you don’t learn much by just filling in numbers but really thinking about on what you spend money on.",
+    "githubUrl": "https://github.com/Sleknuk/debtBalance"
   }
 }
