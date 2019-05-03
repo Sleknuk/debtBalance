@@ -5,7 +5,8 @@
     "privacy": "public",
     "sdkVersion": "31.0.0",
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -22,7 +23,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "nl.maxkunkels.debtBalance"
     },
     "android": {
       "package": "nl.maxkunkels.debtBalance"
